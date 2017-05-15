@@ -1,0 +1,24 @@
+{
+  "name": "tcc_bot",
+  "version": "0.0.1",
+  "description": "Projeto de chatbot utilizando Node.js como projeto de conclusÃ£o de curso de anÃ¡lise e desenvolvimento de sistemas do IFSP - Campus Caraguatatuba",
+  "main": "index.js",
+  "scripts": {
+    "test": "supervisor -q -n exit -x mocha -- -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/silvalexandre/tcc_bot.git"
+  },
+  "keywords": [
+    "node.js",
+    "chatbot",
+    "ifsp"
+  ],
+  "author": "Alexandre Silva <contato@silvalexandre.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/silvalexandre/tcc_bot/issues"
+  },
+  "homepage": "https://gitlab.com/silvalexandre/tcc_bot#README"
+}
