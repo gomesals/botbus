@@ -20,10 +20,18 @@
 		for (var i = 0; i < events.length; i++) {
 			var event = events[i];
 			if (event.message && event.message.text) {
-				Messenger.sendText(event.sender.id, 'Echo:' + event.message.text);
+				Messenger.sendText(event.sender.id, 'Echo:' + event.message.text).then(next).catch(handleErr);
 			}
 		}
 		res.sendStatus(200);
+	}
+
+	function next(data) {
+		// console.log(data);
+	}
+
+	function handleErr(err) {
+		throw err;
 	}
 	module.exports = router;
 })();
