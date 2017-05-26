@@ -2,8 +2,10 @@
 	'use strict';
 	require('dotenv').load();
 	const expect = require('chai').expect;
-	const uid = '1415778101834732';
-	const Messenger = require('../platform/messenger');
+	const uid = 'someuid';
+	const utils = require('../platform/utils');
+	const bot = utils();
+	bot.setPlatform('messenger');
 	describe('platform messenger', () => {
 		describe('send text', () => {
 			it('should be the same object', () => {
@@ -16,14 +18,14 @@
 					method: 'POST',
 					json: {
 						recipient: {
-							id: '1415778101834732'
+							id: uid
 						},
 						message: {
 							text: text
 						}
 					}
 				};
-				Messenger.sendText(uid, text).then(r => {
+				bot.sendText(uid, text).then(r => {
 					expect(r).to.deep.equal(options);
 				}).catch(e => {
 					// It should not reach here
