@@ -1,7 +1,6 @@
 (function() {
 	'use strict';
 	const Messenger = require('./messenger');
-	const sample = require('./sample.js');
 
 	function utils() {
 		const obj = {
@@ -11,11 +10,7 @@
 		var platform;
 
 		function setPlatform(p) {
-			if (p === 'messenger') {
-				platform = Messenger;
-			} else {
-				platform = sample;
-			}
+			platform = Messenger;
 		}
 
 		function sendText(uid, text) {
