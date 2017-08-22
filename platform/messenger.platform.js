@@ -2,7 +2,7 @@
 	'use strict';
 	const request = require('request');
 	const messenger = {
-		sendText: sendText
+		sendText,
 	};
 
 	function send(uid, message, type) {

@@ -3,7 +3,6 @@
 	require('dotenv').load();
 	const express = require('express');
 	const bodyParser = require('body-parser');
-	const request = require('request');
 	const app = express();
 	const PAGES = {
 		index: require('./routes/index'),

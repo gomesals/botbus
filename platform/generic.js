@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	const Messenger = require('./messenger');
+	const Messenger = require('./messenger.platform');
 
 	function utils() {
 		const obj = {
@@ -10,7 +10,11 @@
 		var platform;
 
 		function setPlatform(p) {
-			platform = Messenger;
+			if(p === 'messenger'){
+				platform = Messenger;
+			}else{
+				throw `Platform '${p}' not found.`;
+			}
 		}
 
 		function sendText(uid, text) {

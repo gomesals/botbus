@@ -1,11 +1,10 @@
 (function() {
 	'use strict';
 	const express = require('express');
-	const request = require('request');
-	const utils = require('../platform/utils');
+	const genericBot = require('../platform/generic');
 	const router = express.Router();
-	const bot = utils();
-	bot.setPlatform('messenger');
+	const Bot = genericBot();
+	Bot.setPlatform('messenger');
 	router.route('/').get(_get).post(_post);
 
 	function _get(req, res) {
@@ -22,7 +21,7 @@
 		for (var i = 0; i < events.length; i++) {
 			var event = events[i];
 			if (event.message && event.message.text) {
-				bot.sendText(event.sender.id, 'Echo:' + event.message.text).then(next).catch(handleErr);
+				Bot.sendText(event.sender.id, 'Echo:' + event.message.text).then(next).catch(handleErr);
 			}
 		}
 		res.sendStatus(200);
