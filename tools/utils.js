@@ -276,24 +276,24 @@
 		timeMap.map(time => {
 			if (message.search(time.from[0]) != -1) {
 				if (message.search('vinte e') == -1 && message.search('dezenove') == -1) {
-					hour.push(time.to.am);
+					hour = hour.concat(time.to.am);
 				}
 			}
 			if (message.search(time.from[1]) != -1) {
 				if (message.search('vinte e') != -1) {
 					if (message.search('vinte e uma') != -1) {
-						hour.push('21');
+						hour = hour.concat('21');
 					} else if (message.search('vinte e duas') != -1) {
-						hour.push('22');
+						hour = hour.concat('22');
 					} else if (message.search('vinte e tres') != -1) {
-						hour.push('23');
+						hour = hour.concat('23');
 					} else if (message.search('vinte e quatro') != -1) {
-						hour.push('00');
+						hour = hour.concat('00');
 					} else {
-						hour.push('20');
+						hour = hour.concat('20');
 					}
 				} else {
-					hour.push(time.to.pm);
+					hour = hour.concat(time.to.pm);
 				}
 			}
 		});
