@@ -3,7 +3,7 @@
 	require('dotenv').load();
 	const expect = require('chai').expect;
 	const uid = 'someuid';
-	const utils = require('../platform/utils');
+	const utils = require('../platform/generic');
 	const bot = utils();
 	bot.setPlatform('messenger');
 	describe('platform messenger', () => {

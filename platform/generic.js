@@ -10,9 +10,10 @@
 		var platform;
 
 		function setPlatform(p) {
-			if(p === 'messenger'){
+			if (p === 'messenger') {
 				platform = Messenger;
-			}else{
+			}
+			else {
 				throw `Platform '${p}' not found.`;
 			}
 		}
