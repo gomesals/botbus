@@ -13,11 +13,13 @@
 		lines: require('./api/lines'),
 		paths: require('./api/paths'),
 		neighborhoods: require('./api/neighborhoods'),
+		prices: require('./api/prices'),
 	};
 	app.use('/api/auth', API.auth);
 	app.use('/api/lines', API.lines);
 	app.use('/api/paths', API.paths);
 	app.use('/api/neighborhoods', API.neighborhoods);
+	app.use('/api/prices', API.prices);
 	app.use(bodyParser.urlencoded({
 		extended: false
 	}));
