@@ -3,7 +3,7 @@
 	const expect = require('chai').expect;
 	const util = require('../tools/utils');
 	const moment = require('moment');
-	describe('Util', () => {
+	describe('Utils', () => {
 		describe('removeAccents', () => {
 			it('should remove all accents', () => {
 				var result = util.removeAccents('caçador');
