@@ -6,8 +6,18 @@
 	const app = express();
 	const PAGES = {
 		index: require('./routes/index'),
-		messenger: require('./routes/messenger')
+		messenger: require('./routes/messenger'),
 	};
+	const API = {
+		auth: require('./api/auth'),
+		lines: require('./api/lines'),
+		paths: require('./api/paths'),
+		neighborhoods: require('./api/neighborhoods'),
+	};
+	app.use('/api/auth', API.auth);
+	app.use('/api/lines', API.lines);
+	app.use('/api/paths', API.paths);
+	app.use('/api/neighborhoods', API.neighborhoods);
 	app.use(bodyParser.urlencoded({
 		extended: false
 	}));
