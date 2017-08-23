@@ -1,9 +1,29 @@
 (function() {
 	'use strict';
 	const request = require('request');
-	const messenger = {
-		sendText,
-	};
+	class Messenger {
+		setUid(uid) {
+			this.uid = uid;
+			return this;
+		}
+		wait(ms) {
+			return new Promise((resolve) => {
+				setTimeout(resolve, ms);
+			});
+		}
+		sendText(text) {
+			return new Promise((resolve, reject) => {
+				send(this.uid, {
+					text,
+				}, 'message').then(response => {
+					resolve(response);
+				}).catch(error => {
+					reject(error);
+				});
+			});
+		}
+	}
+	module.exports = Messenger;
 
 	function send(uid, message, type) {
 		return new Promise((resolve, reject) => {
@@ -31,25 +51,12 @@
 					reject(Error(e));
 				}
 				resolve({
-					uid: uid,
-					message: message,
+					uid,
+					message,
 					type: type,
 					date: Date.now()
 				});
 			});
 		});
 	}
-
-	function sendText(uid, text) {
-		return new Promise((resolve, reject) => {
-			send(uid, {
-				text: text
-			}, 'message').then(r => {
-				resolve(r);
-			}).catch(e => {
-				reject(e);
-			});
-		});
-	}
-	module.exports = messenger;
 })();
