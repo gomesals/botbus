@@ -1,34 +1,35 @@
 (function() {
 	'use strict';
 	const express = require('express');
-	const genericBot = require('../platform/generic');
+	const messengerPlatform = require('../platform/messenger');
+	const Messenger = new messengerPlatform();
 	const router = express.Router();
-	const Bot = genericBot();
-	Bot.setPlatform('messenger');
 	router.route('/').get(_get).post(_post);
 
 	function _get(req, res) {
 		if (req.query['hub.verify_token'] === process.env.TOKEN) {
 			res.send(req.query['hub.challenge']);
-		} else {
+		}
+		else {
 			res.send('Invalid TOKEN');
 			console.log('Invalid TOKEN');
 		}
 	}
 
-	function _post(req, res) {
-		var events = req.body.entry[0].messaging;
-		for (var i = 0; i < events.length; i++) {
-			var event = events[i];
+	async function _post(req, res) {
+		const events = req.body.entry[0].messaging;
+		events.map(async (event) => {
 			if (event.message && event.message.text) {
-				Bot.sendText(event.sender.id, 'Echo:' + event.message.text).then(next).catch(handleErr);
+				try {
+					Messenger.setUid(event.sender.id);
+					await Messenger.sendText(`Echo: ${event.message.text}`);
+				}
+				catch (err) {
+					handleErr(err);
+				}
 			}
-		}
+		});
 		res.sendStatus(200);
-	}
-
-	function next(data) {
-		// console.log(data);
 	}
 
 	function handleErr(err) {
