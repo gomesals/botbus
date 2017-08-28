@@ -31,18 +31,19 @@
 
 	describe('platform messenger', () => {
 		describe('#sendText()', () => {
-			it('should be the same object', () => {
-				Messenger.setUid(id);
-				Messenger.sendText(text).then(r => {
-					expect(r).to.deep.equal(options);
-				}).catch(e => {
-					// It should not reach here
-					console.log(e);
-				});
+			it('should be the same object', async() => {
+				try {
+					Messenger.setUid(id);
+					const response = await Messenger.sendText(text);
+					expect(response).to.deep.equal(options);
+				}
+				catch (error) {
+					throw error;
+				}
 			});
 		});
 		describe('#sendWritting()', () => {
-			it('should be the same object', () => {
+			it('should be the same object', async() => {
 				const text = 'Ola, tudo bem pessoal?';
 				const options = {
 					url,
@@ -53,13 +54,14 @@
 						sender_action: 'typing_on',
 					}
 				};
-				Messenger.setUid(id);
-				Messenger.sendWritting().then(r => {
-					expect(r).to.deep.equal(options);
-				}).catch(e => {
-					// It should not reach here
-					console.log(e);
-				});
+				try {
+					Messenger.setUid(id);
+					const response = await Messenger.sendWritting();
+					expect(response).to.deep.equal(options);
+				}
+				catch (error) {
+					throw error;
+				}
 			});
 		});
 		describe('#getInfo()', () => {
