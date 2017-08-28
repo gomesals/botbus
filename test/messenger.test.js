@@ -30,7 +30,7 @@
 
 
 	describe('platform messenger', () => {
-		describe('send a text', () => {
+		describe('#sendText()', () => {
 			it('should be the same object', () => {
 				Messenger.setUid(id);
 				Messenger.sendText(text).then(r => {
@@ -41,7 +41,7 @@
 				});
 			});
 		});
-		describe('send a writting action', () => {
+		describe('#sendWritting()', () => {
 			it('should be the same object', () => {
 				const text = 'Ola, tudo bem pessoal?';
 				const options = {
@@ -60,6 +60,18 @@
 					// It should not reach here
 					console.log(e);
 				});
+			});
+		});
+		describe('#getInfo()', () => {
+			it('should be the same object', async() => {
+				try {
+					Messenger.setUid('1415778101834732');
+					const { first_name } = await Messenger.getInfo();
+					expect(first_name).to.equal('Alexandre');
+				}
+				catch (error) {
+					throw error;
+				}
 			});
 		});
 	});

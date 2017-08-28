@@ -49,6 +49,25 @@
 				send(this.uid, null, 'typing_on').then(resolve).catch(reject);
 			});
 		}
+		/**
+		 * Returns som info about the user.
+		 * 
+		 * @return {Promise} Object with the info: {first_name};
+		 * 
+		 */
+		getInfo() {
+			const url = `https://graph.facebook.com/v2.6/${this.uid}?fields=first_name&access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+			return new Promise((resolve, reject) => {
+				request(url, (err, res, body) => {
+					if (err) return reject(err);
+					if (res.body.error) return reject(res.body.error);
+					body = JSON.parse(body);
+					const { first_name } = body;
+					return resolve({ first_name });
+					// return next(body.first_name);
+				});
+			});
+		}
 	}
 	module.exports = Messenger;
 
