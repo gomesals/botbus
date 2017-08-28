@@ -1,7 +1,6 @@
 (function() {
 	'use strict';
-	const config = require('config');
-	const moment = require('moment');
+	const moment = require('moment-timezone');
 	const accentsMap = {
 		"â": "a",
 		"Â": "A",
@@ -139,6 +138,9 @@
 	}];
 	const period = ['manha', 'tarde', 'noite'];
 	const check = ['antes', 'Antes', 'depois', 'Depois'];
+	
+	moment.locale('pt-br');
+	moment.tz.setDefault("America/Sao_Paulo");
 	/**
 	 * Removes accents.
 	 * 
@@ -353,7 +355,7 @@
 			if (message.search(period[1]) != -1 || message.search(period[2]) != -1) {
 				return 'pm';
 			} else {
-				return moment().utcOffset(config.get('utcOffset')).format('a');
+				return moment().format('a');
 			}
 		}
 	};
@@ -375,8 +377,8 @@
 			result = analyzeTime(message);
 		}
 		if (!result.hour) {
-			result.hour = moment().utcOffset(config.get('utcOffset')).format('HH');
-			result.minute = moment().utcOffset(config.get('utcOffset')).format('mm');
+			result.hour = moment().format('HH');
+			result.minute = moment().format('mm');
 		}
 		result.check = isAfterBefore(message);
 		if (!result.period) {

@@ -3,9 +3,9 @@
 	require('dotenv').load();
 	const expect = require('chai').expect;
 	const uid = 'someuid';
-	const utils = require('../platform/generic');
-	const bot = utils();
-	bot.setPlatform('messenger');
+	const messengerPlatform = require('../platform/messenger');
+	const Messenger = new messengerPlatform();
+	
 	describe('platform messenger', () => {
 		describe('send text', () => {
 			it('should be the same object', () => {
@@ -25,7 +25,8 @@
 						}
 					}
 				};
-				bot.sendText(uid, text).then(r => {
+				Messenger.setUid(uid);
+				Messenger.sendText(text).then(r => {
 					expect(r).to.deep.equal(options);
 				}).catch(e => {
 					// It should not reach here

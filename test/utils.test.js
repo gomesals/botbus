@@ -2,7 +2,9 @@
 	'use strict';
 	const expect = require('chai').expect;
 	const util = require('../tools/utils');
-	const moment = require('moment');
+	const moment = require('moment-timezone');
+	moment.locale('pt-br');
+	moment.tz.setDefault("America/Sao_Paulo");
 	describe('Utils', () => {
 		describe('removeAccents', () => {
 			it('should remove all accents', () => {
@@ -139,11 +141,10 @@
 			});
 			it('should return now', () => {
 				const result = util.convertTime('este lugar nao tem hora');
-				const now = moment().utcOffset(-3);
-				expect(result.hour).to.equal(now.format('HH'));
-				expect(result.minute).to.equal(now.format('mm'));
+				expect(result.hour).to.equal(moment().format('HH'));
+				expect(result.minute).to.equal(moment().format('mm'));
 				expect(result.check).to.equal('gte');
-				expect(result.period).to.equal(now.format('a'));
+				expect(result.period).to.equal(moment().format('a'));
 			});
 			it('should return am', () => {
 				const result = util.convertTime('depois das cinco e meia da manha');
@@ -286,10 +287,9 @@
 			});
 			it('should show from now', () => {
 				const result = util.convertTime('proximo onibus');
-				const now = moment().utcOffset(-3);
-				expect(result.hour).to.equal(now.format('HH'));
-				expect(result.minute).to.equal(now.format('mm'));
-				expect(result.period).to.equal(now.format('a'));
+				expect(result.hour).to.equal(moment().format('HH'));
+				expect(result.minute).to.equal(moment().format('mm'));
+				expect(result.period).to.equal(moment().format('a'));
 				expect(result.check).to.equal('gte');
 			});
 		});
