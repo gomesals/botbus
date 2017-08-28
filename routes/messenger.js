@@ -30,7 +30,7 @@
 			}
 		});
 		res.sendStatus(200);
-	}
+	};
 
 	function handleErr(err) {
 		throw err;
