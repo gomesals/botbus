@@ -1,10 +1,62 @@
 {
     "defaults": {
-        "hi": ["Oi", "Oiee", "Olá", "É bom vê-lo por aqui!", "Ora ora, você por aqui..."],
-        "bye": ["Até logo", "Tchau 😊", "Agradeço a sua visita", "Mantenha contato viu 📱?!"],
-        "thanks": ["De nada 😉", "Por nada", "Não seja por isso 🤗", "Às ordens 😎"],
-        "price": ["Infelizmente nada é de graça não é?! \uD83D\uDE29 \uD83D\uDCB8\uD83D\uDCB8"],
-        "confused": ["Desculpa, mas eu não entendi o que você acabou de dizer"],
-        "compliment": ["Obrigado 😊", "Assim eu fico sem jeito 󾌶", "Estou lisonjeado 🤗"]
+        "hi": [
+            "Oi",
+            "Oiee",
+            "Olá",
+            "É bom vê-lo por aqui!",
+            "Ora ora, você por aqui..."
+        ],
+        "bye": [
+            "Até logo",
+            "Tchau 😊",
+            "Agradeço a sua visita",
+            "Mantenha contato viu 📱?!"
+        ],
+        "thanks": [
+            "De nada 😉",
+            "Por nada",
+            "Não seja por isso 🤗",
+            "Às ordens 😎"
+        ],
+        "price": [
+            "Infelizmente nada é de graça não é?! 😩 💸💸"
+        ],
+        "confused": [
+            "Desculpa, mas eu não entendi o que você acabou de dizer"
+        ],
+        "compliment": [
+            "Obrigado 😊",
+            "Assim eu fico sem jeito 󾌶", "Estou lisonjeado 🤗"
+        ]
+    },
+    "search": {
+        "defaults": [
+            "{verb} {object} de '{from}' à '{to}', {schedule}",
+            "{verb} {object} saindo de '{from}' com destino à '{to}', {schedule}",
+            "{verb} {object} que passam entre '{from}' e '{to}', {schedule}",
+            "{verb} {object} entre '{from}' e '{to}', {schedule}"
+        ],
+        "replace": {
+            "verb": [
+                "Pesquisando",
+                "Procurando"
+            ],
+            "object": [
+                "os próximos ônibus",
+                "ônibus",
+                "linhas de ônibus",
+                "resultados"
+            ],
+            "before": [
+                "antes das {time}"
+            ],
+            "after": [
+                "depois das {time}"
+            ],
+            "icons": [
+                "󾮅"
+            ]
+        }
     }
 }
