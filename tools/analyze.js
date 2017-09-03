@@ -28,7 +28,7 @@
 		const content = (message) => {
 			message = util.removeAccents(message);
 			const intent = {
-			  allowed: false,
+			  isAllowed: false,
 			  hasRequest: false,
 			  hasGreeting: false,
 			  hasBye: false,
@@ -55,7 +55,7 @@
 			const place = util.getPlace(message);
 			const time = util.convertTime(message);
 			intent.hasPlace = (place.from && place.to) ? true : false;
-			intent.allowed = (place.from && place.to) ? true : false;
+			intent.isAllowed = (place.from && place.to) ? true : false;
 			return {
 				intent,
 				from: place.from,
