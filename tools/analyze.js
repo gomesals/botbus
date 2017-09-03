@@ -9,7 +9,7 @@
 			greeting: new RegExp('^(bom dia|boa (tarde|noite)|oi(e)?|ola|ea(e|i)|e a(e|i)|cole|qual e|oo(i|la)|ooo(i|la))(?!.*(?:proxim(a|o)|onibus|horario(s?)|linha)).*', 'gim'),
 			bye: new RegExp('^(xau|tchau|te vejo (mais tarde|depois)|vejo (voce|vc) (depois|mais tarde)|ate( (logo|mais))?).*', 'gim'),
 			thanks: new RegExp('^(entendi|agradeco|obrigad(a|o)|grat(o|a)|agradecid(o|a)|legal|maneiro|top)(?!.*(?:proxim(a|o)|onibus|horario(s?)|linha)).*', 'gim'),
-			price: new RegExp('((qual|quanto|quais são)+ (custa|e|o(s))?)|(tarifa|passage(m|ns)|valor|preco).*', 'gim'),
+			price: new RegExp('^(((qual|quanto|quais (sao|as))+ (custa|e|o(s))?)|(tarifa|passage(m|ns)|valor|preco).*)(?!.*(?:proxim(a|o)))', 'gim'),
 			compliment: new RegExp('te amo|top de( )?mais|maneiro (voce|vc)|(voce|seu|vc)( e)?( um)? ((bem|muito) )?(legal|maneiro|top|bom|esperto|inteligente|de( )?mais|lindo)', 'gim'),
 		};
 		const hasGreeting = (message) => message.match(regex.greeting);
@@ -18,7 +18,7 @@
 		const hasPrice = (message) => message.match(regex.price);
 		const hasCompliment = (message) => message.match(regex.compliment);
 		const hasRequest = (message) => message.match(regex.request);
-		
+
 		/**
 		 * Determines if the message has a request.
 		 *
@@ -28,14 +28,14 @@
 		const content = (message) => {
 			message = util.removeAccents(message);
 			const intent = {
-			  isAllowed: false,
-			  hasRequest: false,
-			  hasGreeting: false,
-			  hasBye: false,
-			  hasThanks: false,
-			  hasPrice: false,
-			  hasCompliment: false,
-			  hasPlace: false,
+				isAllowed: false,
+				hasRequest: false,
+				hasGreeting: false,
+				hasBye: false,
+				hasThanks: false,
+				hasPrice: false,
+				hasCompliment: false,
+				hasPlace: false,
 			};
 			if (hasGreeting(message)) {
 				intent.hasGreeting = true;
@@ -55,7 +55,16 @@
 			const place = util.getPlace(message);
 			const time = util.convertTime(message);
 			intent.hasPlace = (place.from && place.to) ? true : false;
-			intent.isAllowed = (place.from && place.to) ? true : false;
+			if (hasRequest(message) || (place.from && place.to)) {
+				if(hasRequest(message)){
+					intent.hasRequest = true;
+				}
+				if (place.from && place.to) {
+					intent.hasPrice = false;
+					intent.hasRequest = true;
+					intent.isAllowed = true;
+				}
+			}
 			return {
 				intent,
 				from: place.from,
