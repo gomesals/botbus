@@ -11,6 +11,7 @@
 			thanks: new RegExp('^(entendi|agradeco|obrigad(a|o)|grat(o|a)|agradecid(o|a)|legal|maneiro|top)(?!.*(?:proxim(a|o)|onibus|horario(s?)|linha)).*', 'gim'),
 			price: new RegExp('^(((qual|quanto|quais (sao|as))+ (custa|e|o(s))?)|(tarifa|passage(m|ns)|valor|preco).*)(?!.*(?:proxim(a|o)))', 'gim'),
 			compliment: new RegExp('te amo|top de( )?mais|maneiro (voce|vc)|(voce|seu|vc)( e)?( um)? ((bem|muito) )?(legal|maneiro|top|bom|esperto|inteligente|de( )?mais|lindo)', 'gim'),
+			list: new RegExp('((lista)?)(bairros|locais|destinos)', 'gim'),
 		};
 		const hasGreeting = (message) => message.match(regex.greeting);
 		const hasBye = (message) => message.match(regex.bye);
@@ -18,7 +19,7 @@
 		const hasPrice = (message) => message.match(regex.price);
 		const hasCompliment = (message) => message.match(regex.compliment);
 		const hasRequest = (message) => message.match(regex.request);
-
+		const hasList = (message) => message.match(regex.list);
 		/**
 		 * Determines if the message has a request.
 		 *
@@ -36,6 +37,7 @@
 				hasPrice: false,
 				hasCompliment: false,
 				hasPlace: false,
+				hasList: false,
 			};
 			if (hasGreeting(message)) {
 				intent.hasGreeting = true;
@@ -51,6 +53,9 @@
 			}
 			if (hasCompliment(message)) {
 				intent.hasCompliment = true;
+			}
+			if(hasList((message))){
+				intent.hasList = true;
 			}
 			const place = util.getPlace(message);
 			const time = util.convertTime(message);
