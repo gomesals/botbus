@@ -1,6 +1,18 @@
 (function() {
     "use strict";
     const request = require('request-promise');
+    const config = require('config');
+    const Analyze = require('../tools/analyze');
+
+    // Default texts
+    const defaultOf = {
+        price: config.get('defaults.price'),
+        hi: config.get('defaults.hi'),
+        bye: config.get('defaults.bye'),
+        thanks: config.get('defaults.thanks'),
+        compliment: config.get('defaults.compliment'),
+        confused: config.get('defaults.confused'),
+    };
     class General {
         /**
          * Sets the platform.
@@ -21,6 +33,15 @@
             this.platform.setUid(uid);
         }
         /**
+         * Sets the text sent by the user.
+         * 
+         * @param {String} text Text send by the user.
+         *
+         */
+        setText(text) {
+            this.text = text;
+        }
+        /**
          * Returns a callback after the @ms time.
          * 
          * @param {Int} ms Time in milliseconds to wai.
@@ -28,96 +49,58 @@
          * 
          */
         wait(ms) {
-            return new Promise(async (resolve) => {
+            return new Promise(async(resolve) => {
                 setTimeout(resolve, ms);
             });
         }
         /**
-         * Sends a text.
-         * 
-         * @param {String} Text to be sent.
-         * @return	{Promise} Same as send().
-         * 
-         */
-        sendText(text) {
-            return new Promise(async(resolve, reject) => {
-                try {
-                    return resolve(await this.platform.sendText(text));
-                }
-                catch (error) {
-                    return reject(error);
-                }
-            });
-        }
-        /**
-         * Sends a writting action.
+         * Treats the message sent by the user
          *
-         * @return	{Promise} Same as send().
-         * 
          */
-        sendWritting() {
-            return new Promise(async(resolve, reject) => {
-                try {
-                    return resolve(await this.platform.sendWritting());
-                }
-                catch (error) {
-                    return reject(error);
-                }
-            });
-        }
-        /**
-         * Returns some info about the user.
-         * 
-         * @return {Promise} Object with the info: {first_name};
-         * 
-         */
-        getInfo() {
-            return new Promise(async(resolve, reject) => {
-                try {
-                    return resolve(await this.platform.getInfo());
-                }
-                catch (error) {
-                    return reject(error);
-                }
-            });
-        }
-        /**
-         * Creates a postback or url button and returns it.
-         * 
-         * @param {String} title Button's text;
-         * @param {String} type Button's type: url | postback;
-         * @param {String} action Button's action when clicked. Url if website, postback action otherwise.
-         * @return	{Object} object with the button. {title, type, <url|payload>}.
-         * 
-         */
-        createButton(title, type, action) {
-            return new Promise(async(resolve, reject) => {
-                try {
-                    return resolve(await this.platform.createButton(title, type, action));
-                }
-                catch (error) {
-                    return reject(error);
-                }
-            });
-        }
-        /**
-         * Sends a button created by platform.createButton().
-         * 
-         * @param {Array} buttons Array of buttons;
-         * @param {String} text Message's text before showing the buttons.
-         * @return	{Promise} Same as platform.send().
-         * 
-         */
-        sendButton(buttons, text) {
-            return new Promise(async(resolve, reject) => {
-                try {
-                    return resolve(await this.platform.sendButton(buttons, text));
-                }
-                catch (error) {
-                    return reject(error);
-                }
-            });
+        treat() {
+            const { intent, ...search } = Analyze.content(this.text);
+            console.log(intent);
+            console.log(search);
+            if (intent.isAllowed) {
+                this.platform.sendText('pesquisando...');
+                // TODO: search and send the information
+                return;
+            }
+            if (intent.hasPrice) {
+                this.platform.sendText(defaultOf.price[getRandom(defaultOf.price.length)]);
+                // TODO: search and send the prices
+                return;
+            }
+            if (intent.hasGreeting) {
+                this.platform.sendText(defaultOf.hi[getRandom(defaultOf.hi.length)]);
+                return;
+            }
+            if (intent.hasBye) {
+                this.platform.sendText(defaultOf.bye[getRandom(defaultOf.bye.length)]);
+                return;
+            }
+            if (intent.hasThanks) {
+                this.platform.sendText(defaultOf.thanks[getRandom(defaultOf.thanks.length)]);
+                return;
+            }
+            if (intent.hasCompliment) {
+                this.platform.sendText(defaultOf.compliment[getRandom(defaultOf.compliment.length)]);
+                return;
+            }
+            this.platform.sendText(defaultOf.confused[getRandom(defaultOf.confused.length)]);
+            // TODO: send buttons of help
+            return;
         }
     }
     module.exports = General;
+    /**
+     * Generates a random between 0 and length - 1.
+     * 
+     * @param {Int} length Max number allowed - 1.
+     * @return  {Int} The random number.
+     * 
+     */
+    function getRandom(length) {
+        return Math.floor(Math.random() * length);
+    }
 })();
