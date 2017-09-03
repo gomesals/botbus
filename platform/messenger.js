@@ -64,10 +64,19 @@
 					body = JSON.parse(body);
 					const { first_name } = body;
 					return resolve({ first_name });
-					// return next(body.first_name);
+					// returdn next(body.first_name);
 				});
 			});
 		}
+		/**
+		 * Creates a postback or url button and returns it.
+		 * 
+		 * @param {String} title Button's text;
+		 * @param {String} type Button's type: url | postback;
+		 * @param {String} action Button's action when clicked. Url if website, postback action otherwise.
+		 * @return	{Object} object with the button. {title, type, <url|payload>}.
+		 * 
+		 */
 		createButton(title, type, action) {
 			let button = {
 				title,
@@ -82,6 +91,15 @@
 			}
 			return button;
 		}
+		/**
+		 * 
+		 * Sends a button created by #createButton().
+		 * 
+		 * @param {Array} buttons Array of buttons;
+		 * @param {String} text Message's text before showing the buttons.
+		 * @return	{Promise} Same as send().
+		 * 
+		 */
 		sendButton(buttons, text) {
 			const message = {
 				attachment: {
