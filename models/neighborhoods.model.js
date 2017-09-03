@@ -1,11 +1,9 @@
 (function() {
 	'use strict';
 	const mongoose = require('mongoose');
-	var neighborhoodsSchema = new mongoose.Schema({
+	var Neighborhoods = new mongoose.Schema({
 		title: String,
+		value: String,
 	});
-	var Neighborhoods = mongoose.model('Neighborhoods', neighborhoodsSchema, 'neighborhoods');
-	module.exports = {
-		Neighborhoods,
-	};
+	module.exports = mongoose.model('Neighborhoods', Neighborhoods, 'neighborhoods');
 })();
