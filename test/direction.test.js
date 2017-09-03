@@ -3,7 +3,7 @@
 	const expect = require('chai').expect;
 	const direction = require('../tools/direction');
 	describe('direction', () => {
-		describe('compare', () => {
+		describe('#compare()', () => {
 			it('should return 1 item', () => {
 				const data = [{
 					from: 'centro',

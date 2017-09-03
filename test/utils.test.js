@@ -6,7 +6,7 @@
 	moment.locale('pt-br');
 	moment.tz.setDefault("America/Sao_Paulo");
 	describe('Utils', () => {
-		describe('removeAccents', () => {
+		describe('#removeAccents()', () => {
 			it('should remove all accents', () => {
 				const result = util.removeAccents('açãoùü');
 				expect(result).to.equal('acaouu');
@@ -16,7 +16,7 @@
 				expect(result).to.equal('cacador');
 			});
 		});
-		describe('convertTime', () => {
+		describe('#convertTime()', () => {
 			it('should return 0900', () => {
 				const result = util.convertTime('depois das nove');
 				if (moment().format('a') == 'am') {
@@ -293,7 +293,7 @@
 				expect(result.check).to.equal('gte');
 			});
 		});
-		describe('getPlace', () => {
+		describe('#getPlace()', () => {
 			it('should return `centro;morro do abrigo`', () => {
 				const result = util.getPlace('depois das tres e trinta da manha do centro ao morro do abrigo');
 				expect(result.from).to.equal('centro');
