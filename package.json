@@ -30,7 +30,8 @@
 		"express": "^4.15.2",
 		"moment-timezone": "^0.5.13",
 		"mongoose": "^4.9.9",
-		"request": "^2.81.0"
+		"request": "^2.81.0",
+		"request-promise": "^4.2.1"
 	},
 	"devDependencies": {
 		"chai": "^3.5.0"

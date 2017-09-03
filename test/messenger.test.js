@@ -5,7 +5,7 @@
 	const messengerPlatform = require('../platform/messenger');
 	const Messenger = new messengerPlatform();
 
-	const url = 'https://graph.facebook.com/v2.6/me/messages';
+	const uri = 'https://graph.facebook.com/v2.6/me/messages';
 	const access_token = 'EAAIgOCRb6bYBAAcWZCkgxP47gBnrHNO7HseKOE6FgIo4lqZCZChiJIWpBpGIkhpYFCUKCrVNEIA5SeTZB0UabwJF7SIuYIZCZAhyvcVtpQOOrFAOjAYZAdWjIfcql9FC5TrSwOZCiFVVvzYfO1Swe2iDrfomQIE3A3qUWOYpX0u5kQZDZD';
 	const method = 'POST';
 	const id = 'someuid';
@@ -17,15 +17,16 @@
 	};
 	const text = 'Ola, tudo bem pessoal?';
 	const options = {
-		url,
+		uri,
 		qs,
 		method,
-		json: {
+		body: {
 			recipient,
 			message: {
 				text,
 			},
 		},
+		json: true,
 	};
 
 
@@ -46,13 +47,14 @@
 			it('should be the same object', async() => {
 				const text = 'Ola, tudo bem pessoal?';
 				const options = {
-					url,
+					uri,
 					qs,
 					method,
-					json: {
+					body: {
 						recipient,
 						sender_action: 'typing_on',
-					}
+					},
+					json: true,
 				};
 				try {
 					Messenger.setUid(id);
@@ -79,10 +81,10 @@
 		describe('#sendButton()', () => {
 			it('should be the same object to postback', async() => {
 				const options = {
-					url,
+					uri,
 					qs,
 					method,
-					json: {
+					body: {
 						recipient,
 						message: {
 							attachment: {
@@ -99,6 +101,7 @@
 							}
 						},
 					},
+					json: true,
 				};
 				try {
 					const button = await Messenger.createButton('button txt', 'postback', 'ACTION');
@@ -112,10 +115,10 @@
 			});
 			it('should be the same object to url', async() => {
 				const options = {
-					url,
+					uri,
 					qs,
 					method,
-					json: {
+					body: {
 						recipient,
 						message: {
 							attachment: {
@@ -132,6 +135,7 @@
 							}
 						},
 					},
+					json: true,
 				};
 				try {
 					const button = await Messenger.createButton('button txt', 'url', 'http://messenger.com');

@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	const request = require('request');
+	const request = require('request-promise');
 	class Messenger {
 		/**
 		 * Sets user id.
@@ -13,18 +13,6 @@
 			return this;
 		}
 		/**
-		 * Returns a callback after the @ms time.
-		 * 
-		 * @param {Int} ms Time in milliseconds to wai.
-		 * @reutrn	{Function} Callback
-		 * 
-		 */
-		wait(ms) {
-			return new Promise((resolve) => {
-				setTimeout(resolve, ms);
-			});
-		}
-		/**
 		 * Sends a text.
 		 * 
 		 * @param {String} Text to be sent.
@@ -32,10 +20,13 @@
 		 * 
 		 */
 		sendText(text) {
-			return new Promise((resolve, reject) => {
-				send(this.uid, {
-					text,
-				}).then(resolve).catch(reject);
+			return new Promise(async(resolve, reject) => {
+				try {
+					return resolve(await send(this.uid, { text }));
+				}
+				catch (error) {
+					return reject(error);
+				}
 			});
 		}
 		/**
@@ -45,27 +36,30 @@
 		 * 
 		 */
 		sendWritting() {
-			return new Promise((resolve, reject) => {
-				send(this.uid, null, 'typing_on').then(resolve).catch(reject);
+			return new Promise(async(resolve, reject) => {
+				try {
+					return resolve(await send(this.uid, null, 'typing_on'));
+				}
+				catch (error) {
+					return reject(error);
+				}
 			});
 		}
 		/**
-		 * Returns som info about the user.
+		 * Returns some info about the user.
 		 * 
 		 * @return {Promise} Object with the info: {first_name};
 		 * 
 		 */
 		getInfo() {
 			const url = `https://graph.facebook.com/v2.6/${this.uid}?fields=first_name&access_token=${process.env.PAGE_ACCESS_TOKEN}`;
-			return new Promise((resolve, reject) => {
-				request(url, (err, res, body) => {
-					if (err) return reject(err);
-					if (res.body.error) return reject(res.body.error);
-					body = JSON.parse(body);
-					const { first_name } = body;
-					return resolve({ first_name });
-					// returdn next(body.first_name);
-				});
+			return new Promise(async(resolve, reject) => {
+				try {
+					return resolve(JSON.parse(await request(url)));
+				}
+				catch (error) {
+					return reject(error);
+				}
 			});
 		}
 		/**
@@ -78,21 +72,22 @@
 		 * 
 		 */
 		createButton(title, type, action) {
-			let button = {
-				title,
-			};
-			if (type === 'url') {
-				button.type = 'web_url';
-				button.url = action;
-			}
-			else {
-				button.type = 'postback';
-				button.payload = action;
-			}
-			return button;
+			return new Promise((resolve, reject) => {
+				let button = {
+					title,
+				};
+				if (type === 'url') {
+					button.type = 'web_url';
+					button.url = action;
+				}
+				else {
+					button.type = 'postback';
+					button.payload = action;
+				}
+				return resolve(button);
+			});
 		}
 		/**
-		 * 
 		 * Sends a button created by #createButton().
 		 * 
 		 * @param {Array} buttons Array of buttons;
@@ -111,9 +106,13 @@
 					}
 				}
 			};
-
-			return new Promise((resolve, reject) => {
-				send(this.uid, message).then(resolve).catch(reject);
+			return new Promise(async(resolve, reject) => {
+				try {
+					return resolve(await send(this.uid, message));
+				}
+				catch (error) {
+					return reject(error);
+				}
 			});
 		}
 	}
@@ -129,40 +128,35 @@
 	 *
 	 */
 	function send(uid, message, type = 'message') {
-		return new Promise((resolve, reject) => {
+		return new Promise(async(resolve, reject) => {
 			const options = {
-				url: 'https://graph.facebook.com/v2.6/me/messages',
+				uri: 'https://graph.facebook.com/v2.6/me/messages',
 				qs: {
 					access_token: process.env.PAGE_ACCESS_TOKEN
 				},
 				method: 'POST',
-				json: {
+				body: {
 					recipient: {
 						id: uid
 					},
-				}
+				},
+				json: true,
 			};
 			if (type === 'message') {
-				options.json.message = message;
+				options.body.message = message;
 			}
 			else {
-				options.json.sender_action = type;
+				options.body.sender_action = type;
 			}
 			if (process.env.NODE_ENV === 'test') {
 				return resolve(options);
 			}
-			request(options, (err, res, body) => {
-				if (err || res.body.error) {
-					const e = (err ? err : res.body.error);
-					return reject(Error(e));
-				}
-				resolve({
-					uid,
-					message,
-					type,
-					date: Date.now()
-				});
-			});
+			try {
+				return resolve(await request(options));
+			}
+			catch (error) {
+				return reject(error);
+			}
 		});
 	}
 })();
