@@ -68,6 +68,36 @@
 				});
 			});
 		}
+		createButton(title, type, action) {
+			let button = {
+				title,
+			};
+			if (type === 'url') {
+				button.type = 'web_url';
+				button.url = action;
+			}
+			else {
+				button.type = 'postback';
+				button.payload = action;
+			}
+			return button;
+		}
+		sendButton(buttons, text) {
+			const message = {
+				attachment: {
+					type: "template",
+					payload: {
+						template_type: "button",
+						text,
+						buttons,
+					}
+				}
+			};
+
+			return new Promise((resolve, reject) => {
+				send(this.uid, message).then(resolve).catch(reject);
+			});
+		}
 	}
 	module.exports = Messenger;
 
@@ -106,7 +136,7 @@
 			request(options, (err, res, body) => {
 				if (err || res.body.error) {
 					const e = (err ? err : res.body.error);
-					reject(Error(e));
+					return reject(Error(e));
 				}
 				resolve({
 					uid,

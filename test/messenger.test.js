@@ -76,5 +76,73 @@
 				}
 			});
 		});
+		describe('#sendButton()', () => {
+			it('should be the same object to postback', async() => {
+				const options = {
+					url,
+					qs,
+					method,
+					json: {
+						recipient,
+						message: {
+							attachment: {
+								payload: {
+									buttons: [{
+										title: "button txt",
+										type: "postback",
+										payload: "ACTION",
+									}, ],
+									template_type: "button",
+									text: "texto da mensagem",
+								},
+								type: "template",
+							}
+						},
+					},
+				};
+				try {
+					const button = await Messenger.createButton('button txt', 'postback', 'ACTION');
+					Messenger.setUid('someuid');
+					const response = await Messenger.sendButton([button], 'texto da mensagem');
+					expect(response).to.deep.equal(options);
+				}
+				catch (error) {
+					throw error;
+				}
+			});
+			it('should be the same object to url', async() => {
+				const options = {
+					url,
+					qs,
+					method,
+					json: {
+						recipient,
+						message: {
+							attachment: {
+								payload: {
+									buttons: [{
+										title: "button txt",
+										type: "web_url",
+										url: "http://messenger.com",
+									}, ],
+									template_type: "button",
+									text: "texto da mensagem",
+								},
+								type: "template",
+							}
+						},
+					},
+				};
+				try {
+					const button = await Messenger.createButton('button txt', 'url', 'http://messenger.com');
+					Messenger.setUid('someuid');
+					const response = await Messenger.sendButton([button], 'texto da mensagem');
+					expect(response).to.deep.equal(options);
+				}
+				catch (error) {
+					throw error;
+				}
+			});
+		});
 	});
 })();
