@@ -12,6 +12,7 @@
         thanks: config.get('defaults.thanks'),
         compliment: config.get('defaults.compliment'),
         confused: config.get('defaults.confused'),
+        list: config.get('defaults.list'),
     };
     const searching = {
         defaults: config.get('search.defaults'),
@@ -77,6 +78,7 @@
             // console.log(intent);
             if (intent.isAllowed) {
                 this.platform.sendText(getSearchingText(search));
+                this.platform.sendWritting();
                 console.log(search);
                 // TODO: search and send the information
                 return;
@@ -100,6 +102,12 @@
             }
             if (intent.hasCompliment) {
                 this.platform.sendText(defaultOf.compliment[getRandom(defaultOf.compliment.length)]);
+                return;
+            }
+            if(intent.hasList){
+                this.platform.sendText(defaultOf.list[getRandom(defaultOf.list.length)]);
+                this.platform.sendWritting();
+                // TODO: search and send the neighborhoods
                 return;
             }
             this.platform.sendText(defaultOf.confused[getRandom(defaultOf.confused.length)]);

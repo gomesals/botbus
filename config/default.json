@@ -23,11 +23,18 @@
             "Infelizmente nada é de graça não é?! 😩 💸💸"
         ],
         "confused": [
-            "Desculpa, mas eu não entendi o que você acabou de dizer"
+            "Desculpa, mas eu não entendi o que você acabou de dizer",
+            "Desculpa, mas ainda não consigo entender o que você disse",
+            "Sinto muito, mas não entendi o que você disse."
         ],
         "compliment": [
             "Obrigado 😊",
             "Assim eu fico sem jeito 󾌶", "Estou lisonjeado 🤗"
+        ],
+        "list": [
+            "Esta é a lista de bairros disponíveis",
+            "Você pode utilizar estes bairros para a pesquisa",
+            "Estes são os bairros disponíveis"
         ]
     },
     "search": {
