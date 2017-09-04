@@ -1,0 +1,67 @@
+* {
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	box-sizing: border-box;
+	height: 100%;
+}
+
+*,
+*:after,
+*:before {
+	box-sizing: inherit;
+}
+
+body {
+	font-size: 100%;
+
+	position: relative;
+
+	min-height: 100%;
+	margin: 0;
+	padding-bottom: 4em;
+
+	color: $text;
+	background-color: $background-color;
+}
+
+::selection {
+	color: $text-white;
+	background: $primary;
+}
+
+img {
+	max-width: 100%;
+	height: auto
+}
+
+main {
+	width: 75%;
+	margin: 0 auto;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+	display: none !important;
+}
+
+@media (--xs) {
+	body {
+		font-size: 85%;
+		main {
+			width: 90%;
+		}
+	}
+}
+
+@media (--sm-max) {}
+
+@media (--sm-min) {}

@@ -14,7 +14,11 @@
 		neighborhoods: require('./api/neighborhoods'),
 		prices: require('./api/prices'),
 	};
+	const PAINEL = {
+		neighborhoods: require('./routes/neighborhoods'),
+	};
 	require('./settings')(app);
+	app.use('/painel/neighborhoods', PAINEL.neighborhoods);
 	app.use('/api/auth', API.auth);
 	app.use('/api/lines', API.lines);
 	app.use('/api/paths', API.paths);

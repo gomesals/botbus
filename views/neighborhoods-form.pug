@@ -1,0 +1,18 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/form.css" media="all")
+		title BusBot - Bairros
+	body(data-ng-app="busbot")
+		include default/navbar.pug
+		main(role="main" data-ng-controller="neighFormCtrl as bairro" data-ng-init="bairro.edit="+edit+"")
+			form(name="bairroForm")
+				section
+					.form-control
+						label Título
+						input.input(type="text" data-ng-model="bairro.data.title" placeholder="Título" required data-ng-disabled="bairro.saving")
+				.actions
+					a(href="/painel/neighborhoods" title="Cancelar" data-ng-disabled="bairro.saving") Cancelar
+					button(data-ng-click="bairro.save()" data-ng-disabled="bairroForm.$invalid || bairro.saving") Salvar
+		script(src="js/neighborhoods.js")

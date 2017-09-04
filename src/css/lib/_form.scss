@@ -1,0 +1,38 @@
+.form-control {
+	margin-bottom: 1em;
+	label {
+		display: inline-block;
+
+		margin-bottom: .5em;
+
+		color: $text--hint;
+	}
+}
+
+.help {
+	font-size: .9em;
+	font-style: italic;
+
+	display: inline;
+
+	color: $text--secondary;
+}
+
+.input {
+	width: 100%;
+	padding: .5em;
+
+	transition: border-color 150ms linear;
+	transition-property: background-color, border-color;
+
+	border: 1px solid $gray;
+	border-radius: 4px;
+	&:hover {
+		border-color: color($gray shade(15%));
+	}
+	&:active,
+	&:focus {
+		border-color: $accent;
+		outline: 0;
+	}
+}

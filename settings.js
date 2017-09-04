@@ -1,6 +1,8 @@
 (function() {
     "use strict";
+    const express = require('express');
     const bodyParser = require('body-parser');
+    const compression = require('compression');
     const mongoose = require('mongoose');
     const moment = require('moment');
     const mongodbUri = process.env.MONGO_CONTROL;
@@ -18,11 +20,16 @@
     mongoose.connection.on('error', errConenection);
     mongoose.connection.on('disconnected', disconnected);
     module.exports = (app) => {
-
+        app.set('view engine', 'pug');
+        app.use(express.static('./public'));
         app.use(bodyParser.json());
+        app.use(compression());
         app.use(bodyParser.urlencoded({
             extended: false
         }));
+        app.locals.Site = {
+			base: process.env.APP_URL,
+		};
     };
 
     process.on('SIGINT', function() {

@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	const mongoose = require('mongoose');
-	var linesSchema = new mongoose.Schema({
+	var Lines = new mongoose.Schema({
 		from: String,
 		to: String,
 		workDay: ['String'],
@@ -14,8 +14,5 @@
 		},
 		passesBy: ['String']
 	});
-	var Lines = mongoose.model('Lines', linesSchema, 'lines');
-	module.exports = {
-		Lines,
-	};
+	module.exports = mongoose.model('Lines', Lines, 'lines');
 })();
