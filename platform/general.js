@@ -88,6 +88,13 @@
 						this.platform.sendText('Precisa implementar sobre');
 						resolve(true);
 						break;
+					case 'DUVIDA':
+					case 'DUVIDAS':
+					case 'DÚVIDA':
+					case 'DÚVIDAS':
+						this.sendDoubts();
+						resolve(true);
+						break;
 					default:
 						resolve(false);
 						break;
@@ -183,11 +190,75 @@
 				case 'MENU_PAYLOAD_ABOUT':
 					this.platform.sendText('Precisa implementar sobre');
 					break;
+				case 'ACTION_PAYLOAD_DOUBTS_BEFORE':
+					this.platform.sendText(config.get('postback.doubts.beforeTime.answer'));
+					this.wait(500).then(() => {
+						this.platform.sendWritting();
+					});
+					this.wait(4000).then(() => {
+						this.platform.sendActions(config.get('postback.doubts.actions'), config.get('postback.doubts.examples'));
+					});
+					break;
+				case 'ACTION_PAYLOAD_DOUBTS_TIME':
+					this.sendDoubtsTime();
+					break;
 				default:
 					this.confused();
 					console.log(`Postback not expected: ${postback.payload}`);
 					break;
 			}
+		}
+		/**
+		 * Sends the answer to doubts.timeWrong.question
+		 * 
+		 */
+		sendDoubtsTime() {
+			this.platform.sendText(config.get('postback.doubts.timeWrong.answer')[0]);
+			let offset = 500;
+			this.wait(offset).then(() => {
+				this.platform.sendWritting();
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendText(config.get('postback.doubts.timeWrong.answer')[1]);
+			});
+			offset += 500;
+			this.wait(offset).then(() => {
+				this.platform.sendWritting();
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendActions(config.get('postback.doubts.actions'), config.get('postback.doubts.examples'));
+			});
+		}
+		/**
+		 * Sends a list of doubts.
+		 * 
+		 */
+		async sendDoubts() {
+			const buttonBeforeTime = [
+				await this.platform.createButton('Por quê?', 'postback', 'ACTION_PAYLOAD_DOUBTS_BEFORE'),
+			];
+			const buttonTimeWrong = [
+				await this.platform.createButton('Por quê?', 'postback', 'ACTION_PAYLOAD_DOUBTS_TIME'),
+			];
+			let offset = 0;
+			this.platform.sendText(config.get('postback.doubts.main'));
+			this.wait(offset).then(() => {
+				this.platform.sendWritting();
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendButton(buttonBeforeTime, config.get('postback.doubts.beforeTime.question'));
+			});
+			offset += 500;
+			this.wait(offset).then(() => {
+				this.platform.sendWritting();
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendButton(buttonTimeWrong, config.get('postback.doubts.timeWrong.question'));
+			});
 		}
 		/**
 		 * Sends examples

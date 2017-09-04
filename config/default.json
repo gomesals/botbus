@@ -25,7 +25,26 @@
             "Depois das 10:00 do guaecá até o topo",
             "Ah, e lembre-se que você precisa inserir 'de/até' antes do bairro pra eu poder entender ;)",
             "Acho que você já consegue, tente aí agora :)"
-        ]
+        ],
+        "doubts": {
+            "actions": [{
+                "title": "Exemplos",
+                "payload": "ACTION_PAYLOAD_SAMPLES"
+            }],
+            "main": "Eu pensei em algumas coisas, e acho que você possa ter dúvidas em relação a esses assuntos aqui",
+            "beforeTime": {
+                "question": "Quando pesquiso os ônibus antes de uma hora, eles não são os mais próximos",
+                "answer": "Isto acontece porque eu ainda não sei pesquisar corretamente, e preciso fazer uma continha pra procurar os horários mais próximos"
+            },
+            "timeWrong": {
+                "question": "Quando pesquiso um horário de dia, ele aparece de noite, ou vice versa",
+                "answer": [
+                    "É que eu tento prever o horário que você está buscando. Se eu perceber que está de noite, vou pesqusiar os horários da noite, e o mesmo ocorre quando de dia",
+                    "Para evitar isso, você pode adicionar o horário que quer, como manhã, tarde ou noite"
+                ]
+            },
+            "examples": "Você pode clicar aqui em exemplos para ter uma melhor ideia"
+        }
     },
     "defaults": {
         "hi": [

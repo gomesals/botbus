@@ -115,6 +115,14 @@
 				}
 			});
 		}
+		/**
+		 * Sends actions after text
+		 * 
+		 * @param {Array} actions Array of objects of actions to be sent. [{title, payload}];
+		 * @param {String} text Text to be sent above the actions.
+		 * @return	{Promise} Same as send().
+		 * 
+		 */
 		sendActions(actions, text) {
 			let message = {
 				text,
