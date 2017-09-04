@@ -86,8 +86,7 @@
                 return;
             }
             if (intent.hasPrice) {
-                this.platform.sendText(defaultOf.price[getRandom(defaultOf.price.length)]);
-                // TODO: search and send the prices
+                this.sendPrice();
                 return;
             }
             if (intent.hasGreeting) {
@@ -110,10 +109,54 @@
                 this.sendList();
                 return;
             }
-            this.platform.sendText(defaultOf.confused[getRandom(defaultOf.confused.length)]);
-            // TODO: send buttons of help
+            this.confused();
             return;
         }
+        postbacks(postback) {
+            switch (postback.payload) {
+                case 'MENU_PAYLOAD_LIST':
+                    this.sendList();
+                    break;
+                case 'MENU_PAYLOAD_SAMPLES':
+                    this.platform.sendText('Precisa implementar');
+                    break;
+                case 'MENU_PAYLOAD_HELP':
+                    this.platform.sendText('Precisa implementar');
+                    break;
+                case 'MENU_PAYLOAD_SAMPLES':
+                    this.platform.sendText('Precisa implementar');
+                    break;
+                case 'MENU_PAYLOAD_PRICE':
+                    this.sendPrice();
+                    break;
+                case 'MENU_PAYLOAD_ABOUT':
+                    this.platform.sendText('Precisa implementar');
+                    break;
+                default:
+                    this.confused();
+                    console.log(`Postback not expected: ${postback.payload}`);
+                    break;
+            }
+        }
+        /**
+         * Sends messages and buttons to help.
+         */
+        confused() {
+            this.platform.sendText(defaultOf.confused[getRandom(defaultOf.confused.length)]);
+            // TODO: send buttons of help
+        }
+        /**
+         * Sends a list of prices.
+         * 
+         */
+        async sendPrice() {
+            this.platform.sendText(defaultOf.price[getRandom(defaultOf.price.length)]);
+            // TODO: search and send the prices
+        }
+        /**
+         * Sends a list of neighborhoods available.
+         * 
+         */
         async sendList() {
             this.platform.sendText(defaultOf.list[getRandom(defaultOf.list.length)]);
             const options = {

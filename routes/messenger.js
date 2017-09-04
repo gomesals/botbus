@@ -22,9 +22,9 @@
 	async function _post(req, res) {
 		const events = req.body.entry[0].messaging;
 		events.map(async(event) => {
+			General.setUid(event.sender.id);
 			if (event.message && event.message.text) {
 				try {
-					General.setUid(event.sender.id);
 					General.setText(event.message.text);
 					General.treat();
 				}
@@ -33,7 +33,7 @@
 				}
 			}
 			else if (event.postback) {
-				// TODO: treat event.
+				General.postbacks(event.postback);
 			}
 		});
 		res.sendStatus(200);
