@@ -31,7 +31,7 @@
         };
         const { result } = await request(options);
         console.log(`#getStarted(): ${result}`);
-    }
+    };
     async function setMenu() {
         options.body = {
             setting_type: "call_to_actions",

@@ -1,4 +1,11 @@
 {
+    "postback": {
+        "getStarted": [
+            "Oi, prazer em te conhecer, eu sou o BotBus 🤖, e sou o bot que diz o seu próximo ônibus 🚌🚌",
+            "Como eu ainda sou novo, só conheço as linhas de São Sebastião/SP, mas quando eu crescer, vou poder conhecer as linhas de todo o Brasil 🇧🇷, inclusíve aí da sua cidade ;)",
+            "Vou deixar algumas opções aqui pra você, aí você pode me conhecer melhor 😉"
+        ]
+    },
     "defaults": {
         "hi": [
             "Oi",

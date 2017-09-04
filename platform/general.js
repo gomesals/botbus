@@ -114,6 +114,16 @@
         }
         postbacks(postback) {
             switch (postback.payload) {
+                case 'GET_STARTED_PAYLOAD':
+                    const messages = config.get('postback.getStarted');
+                    let offset = 0;
+                    messages.map(message => {
+                        this.wait(offset).then(() => {
+                            this.platform.sendText(message);
+                        });
+                        offset += 4500;
+                    });
+                    break;
                 case 'MENU_PAYLOAD_LIST':
                     this.sendList();
                     break;
