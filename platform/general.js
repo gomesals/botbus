@@ -85,7 +85,7 @@
 						resolve(true);
 						break;
 					case 'SOBRE':
-						this.platform.sendText('Precisa implementar sobre');
+						this.sendAbout();
 						resolve(true);
 						break;
 					case 'DUVIDA':
@@ -188,7 +188,7 @@
 					this.sendPrice();
 					break;
 				case 'MENU_PAYLOAD_ABOUT':
-					this.platform.sendText('Precisa implementar sobre');
+					this.sendAbout();
 					break;
 				case 'ACTION_PAYLOAD_DOUBTS_BEFORE':
 					this.platform.sendText(config.get('postback.doubts.beforeTime.answer'));
@@ -207,6 +207,60 @@
 					console.log(`Postback not expected: ${postback.payload}`);
 					break;
 			}
+		}
+		async sendAbout() {
+			const { first_name } = await this.platform.getInfo();
+
+			// const buttonsFeedback = [
+			// this.platform.createButton('url', 'Facebook', 'https://facebook.com/silvalexandre0'),
+			// this.platform.createButton('postback', config.get('actions.wantEmail'), 'want_to_know_email')
+			// ];
+			const buttonAge = await this.platform.createButton('Sua idade é...', 'postback', 'ABOUT_PAYLOAD_AGE');
+			const buttonAlexandre = await this.platform.createButton('Alexandre', 'url', 'https://facebook.com/silvalexandre0');
+			const buttonMessias = await this.platform.createButton('Messias', 'url', 'https://facebook.com/MessiasOliveira00');
+
+			let offset = 0;
+			config.get('postback.about.hi').map(hi => {
+				this.wait(offset, hi).then(hi => {
+					this.platform.sendText(hi);
+					this.wait(500).then(() => {
+						this.platform.sendWritting();
+					});
+				});
+				offset += 3500;
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendButton([buttonAge], config.get('postback.about.iAmChild'));
+				this.wait(1000).then(() => {
+					this.platform.sendWritting();
+				});
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendText(config.get('postback.about.shy').replace('{name}', first_name));
+				this.wait(500).then(() => {
+					this.platform.sendWritting();
+				});
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendButton([buttonAlexandre, buttonMessias], config.get('postback.about.message'));
+				this.wait(500).then(() => {
+					this.platform.sendWritting();
+				});
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendText(config.get('postback.about.feedback')[0]);
+				this.wait(500).then(() => {
+					this.platform.sendWritting();
+				});
+			});
+			offset += 3500;
+			this.wait(offset).then(() => {
+				this.platform.sendText(config.get('postback.about.feedback')[1]);
+			});
 		}
 		/**
 		 * Sends the answer to doubts.timeWrong.question
@@ -259,6 +313,7 @@
 			this.wait(offset).then(() => {
 				this.platform.sendButton(buttonTimeWrong, config.get('postback.doubts.timeWrong.question'));
 			});
+			// Adicionar botão para entrar em contato
 		}
 		/**
 		 * Sends examples
