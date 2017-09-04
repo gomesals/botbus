@@ -115,6 +115,27 @@
 				}
 			});
 		}
+		sendActions(actions, text) {
+			let message = {
+				text,
+				quick_replies: []
+			};
+			message.quick_replies = actions.map(action => {
+				return {
+					content_type: "text",
+					title: action.title,
+					payload: action.payload,
+				};
+			});
+			return new Promise(async(resolve, reject) => {
+				try {
+					return resolve(await send(this.uid, message));
+				}
+				catch (err) {
+					return reject(err);
+				}
+			});
+		}
 	}
 	module.exports = Messenger;
 

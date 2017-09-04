@@ -112,7 +112,7 @@
             this.confused();
             return;
         }
-        postbacks(postback) {
+        async postbacks(postback) {
             switch (postback.payload) {
                 case 'GET_STARTED_PAYLOAD':
                     const messages = config.get('postback.getStarted');
@@ -124,22 +124,25 @@
                         offset += 4500;
                     });
                     break;
+                case 'ACTIONS_PAYLOAD_DOUBTS':
+                    this.platform.sendText('Precisa implementar');
+                    break;
                 case 'MENU_PAYLOAD_LIST':
                     this.sendList();
                     break;
-                case 'MENU_PAYLOAD_SAMPLES':
-                    this.platform.sendText('Precisa implementar');
-                    break;
                 case 'MENU_PAYLOAD_HELP':
-                    this.platform.sendText('Precisa implementar');
+                    const { first_name } = await this.platform.getInfo();
+                    this.platform.sendActions(config.get('postback.help.actions'), config.get('postback.help.text').replace('{name}', first_name));
                     break;
                 case 'MENU_PAYLOAD_SAMPLES':
+                case 'ACTION_PAYLOAD_SAMPLES':
                     this.platform.sendText('Precisa implementar');
                     break;
                 case 'MENU_PAYLOAD_PRICE':
                     this.sendPrice();
                     break;
                 case 'MENU_PAYLOAD_ABOUT':
+                case 'ACTION_PAYLOAD_HELP':
                     this.platform.sendText('Precisa implementar');
                     break;
                 default:

@@ -45,21 +45,15 @@
 		});
 		describe('#sendWritting()', () => {
 			it('should be the same object', async() => {
-				const text = 'Ola, tudo bem pessoal?';
-				const options = {
-					uri,
-					qs,
-					method,
-					body: {
-						recipient,
-						sender_action: 'typing_on',
-					},
-					json: true,
+				const option = { ...options };
+				option.body = {
+					recipient,
+					sender_action: 'typing_on',
 				};
 				try {
 					Messenger.setUid(id);
 					const response = await Messenger.sendWritting();
-					expect(response).to.deep.equal(options);
+					expect(response).to.deep.equal(option);
 				}
 				catch (error) {
 					throw error;
@@ -78,70 +72,90 @@
 				}
 			});
 		});
+		describe('#sendActions()', () => {
+			it('should be the same object', async() => {
+				const option = { ...options };
+				const actions = [{
+					title: "Action 1",
+					payload: "ACTIONS_PAYLOAD_1"
+				}, {
+					title: "Action 2",
+					payload: "ACTIONS_PAYLOAD_2"
+				}, ];
+				const quick_replies = actions.map(action => {
+					return {
+						content_type: "text",
+						title: action.title,
+						payload: action.payload,
+					};
+				});
+
+				const text = 'Sending actions is fun!';
+
+
+				try {
+					Messenger.setUid(id);
+					const response = await Messenger.sendActions(actions, text);
+					option.body.message = {
+						text,
+						quick_replies,
+					};
+					expect(option).to.deep.equal(response);
+				}
+				catch (error) {
+					throw error;
+				}
+			});
+		});
 		describe('#sendButton()', () => {
 			it('should be the same object to postback', async() => {
-				const options = {
-					uri,
-					qs,
-					method,
-					body: {
-						recipient,
-						message: {
-							attachment: {
-								payload: {
-									buttons: [{
-										title: "button txt",
-										type: "postback",
-										payload: "ACTION",
-									}, ],
-									template_type: "button",
-									text: "texto da mensagem",
-								},
-								type: "template",
-							}
+				const option = { ...options };
+				option.body.message = {
+					attachment: {
+						payload: {
+							buttons: [{
+								title: "button txt",
+								type: "postback",
+								payload: "ACTION",
+							}, ],
+							template_type: "button",
+							text: "texto da mensagem",
 						},
-					},
-					json: true,
+						type: "template",
+					}
 				};
+
 				try {
 					const button = await Messenger.createButton('button txt', 'postback', 'ACTION');
-					Messenger.setUid('someuid');
+					Messenger.setUid(id);
 					const response = await Messenger.sendButton([button], 'texto da mensagem');
-					expect(response).to.deep.equal(options);
+					expect(response).to.deep.equal(option);
 				}
 				catch (error) {
 					throw error;
 				}
 			});
 			it('should be the same object to url', async() => {
-				const options = {
-					uri,
-					qs,
-					method,
-					body: {
-						recipient,
-						message: {
-							attachment: {
-								payload: {
-									buttons: [{
-										title: "button txt",
-										type: "web_url",
-										url: "http://messenger.com",
-									}, ],
-									template_type: "button",
-									text: "texto da mensagem",
-								},
-								type: "template",
-							}
+				const option = { ...options };
+				option.body.message = {
+					attachment: {
+						payload: {
+							buttons: [{
+								title: "button txt",
+								type: "web_url",
+								url: "http://messenger.com",
+							}, ],
+							template_type: "button",
+							text: "texto da mensagem",
 						},
-					},
-					json: true,
+						type: "template",
+					}
 				};
 				try {
 					const button = await Messenger.createButton('button txt', 'url', 'http://messenger.com');
-					Messenger.setUid('someuid');
+					Messenger.setUid(id);
 					const response = await Messenger.sendButton([button], 'texto da mensagem');
-					expect(response).to.deep.equal(options);
+					expect(response).to.deep.equal(option);
 				}
 				catch (error) {
 					throw error;
