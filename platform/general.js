@@ -327,8 +327,7 @@
 		 * Sends messages and buttons to help.
 		 */
 		confused() {
-			this.platform.sendText(defaultOf.confused[getRandom(defaultOf.confused.length)]);
-			// TODO: send buttons of help
+			this.platform.sendActions(defaultOf.confused.actions, defaultOf.confused.texts[getRandom(defaultOf.confused.texts.length)]);
 		}
 		/**
 		 * Sends a list of prices.
