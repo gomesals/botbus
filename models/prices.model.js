@@ -1,12 +1,9 @@
 (function() {
 	'use strict';
 	const mongoose = require('mongoose');
-	var pricesSchema = new mongoose.Schema({
+	var Prices = new mongoose.Schema({
 		title: String,
-		neighborhoods: ['String'],
+		price: String,
 	});
-	var Prices = mongoose.model('Prices', pricesSchema, 'prices');
-	module.exports = {
-		Prices,
-	};
+	module.exports = mongoose.model('Prices', Prices, 'prices');
 })();
