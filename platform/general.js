@@ -210,12 +210,6 @@
 		}
 		async sendAbout() {
 			const { first_name } = await this.platform.getInfo();
-
-			// const buttonsFeedback = [
-			// this.platform.createButton('url', 'Facebook', 'https://facebook.com/silvalexandre0'),
-			// this.platform.createButton('postback', config.get('actions.wantEmail'), 'want_to_know_email')
-			// ];
-			const buttonAge = await this.platform.createButton('Sua idade é...', 'postback', 'ABOUT_PAYLOAD_AGE');
 			const buttonAlexandre = await this.platform.createButton('Alexandre', 'url', 'https://facebook.com/silvalexandre0');
 			const buttonMessias = await this.platform.createButton('Messias', 'url', 'https://facebook.com/MessiasOliveira00');
 
@@ -231,7 +225,7 @@
 			});
 			offset += 3500;
 			this.wait(offset).then(() => {
-				this.platform.sendButton([buttonAge], config.get('postback.about.iAmChild'));
+				this.platform.sendText(config.get('postback.about.iAmChild'));
 				this.wait(1000).then(() => {
 					this.platform.sendWritting();
 				});
