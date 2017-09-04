@@ -38,8 +38,8 @@
 					const response = await Messenger.sendText(text);
 					expect(response).to.deep.equal(options);
 				}
-				catch (error) {
-					throw error;
+				catch (err) {
+					handleErr(err);
 				}
 			});
 		});
@@ -55,8 +55,8 @@
 					const response = await Messenger.sendWritting();
 					expect(response).to.deep.equal(option);
 				}
-				catch (error) {
-					throw error;
+				catch (err) {
+					handleErr(err);
 				}
 			});
 		});
@@ -67,8 +67,8 @@
 					const { first_name } = await Messenger.getInfo();
 					expect(first_name).to.equal('Alexandre');
 				}
-				catch (error) {
-					throw error;
+				catch (err) {
+					handleErr(err);
 				}
 			});
 		});
@@ -102,8 +102,8 @@
 					};
 					expect(option).to.deep.equal(response);
 				}
-				catch (error) {
-					throw error;
+				catch (err) {
+					handleErr(err);
 				}
 			});
 		});
@@ -131,8 +131,8 @@
 					const response = await Messenger.sendButton([button], 'texto da mensagem');
 					expect(response).to.deep.equal(option);
 				}
-				catch (error) {
-					throw error;
+				catch (err) {
+					handleErr(err);
 				}
 			});
 			it('should be the same object to url', async() => {
@@ -157,10 +157,14 @@
 					const response = await Messenger.sendButton([button], 'texto da mensagem');
 					expect(response).to.deep.equal(option);
 				}
-				catch (error) {
-					throw error;
+				catch (err) {
+					handleErr(err);
 				}
 			});
 		});
 	});
+
+	function handleErr(err) {
+		console.log(err);
+	}
 })();

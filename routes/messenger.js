@@ -40,7 +40,7 @@
 	};
 
 	function handleErr(err) {
-		throw err;
+		console.log(err);
 	}
 	module.exports = router;
 })();

@@ -16,7 +16,7 @@
 			}
 			catch (err) {
 				res.sendStatus(500);
-				throw err;
+				handleErr(err);
 			}
 		}
 		try {
@@ -24,7 +24,7 @@
 		}
 		catch (err) {
 			res.sendStatus(500);
-			throw err;
+			handleErr(err);
 		}
 	};
 
@@ -38,7 +38,7 @@
 		}
 		catch (err) {
 			res.sendStatus(500);
-			throw err;
+			handleErr(err);
 		}
 	};
 
@@ -52,7 +52,7 @@
 		}
 		catch (err) {
 			res.sendStatus(500);
-			throw err;
+			handleErr(err);
 		}
 	};
 
@@ -63,7 +63,7 @@
 		}
 		catch (err) {
 			res.sendStatus(500);
-			throw err;
+			handleErr(err);
 		}
 	};
 
@@ -74,8 +74,12 @@
 		}
 		catch (err) {
 			res.sendStatus(500);
-			throw err;
+			handleErr(err);
 		}
 	};
 	module.exports = router;
+
+	function handleErr(err) {
+		console.log(err);
+	}
 })();

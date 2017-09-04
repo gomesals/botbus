@@ -411,7 +411,7 @@
 				});
 			}
 			catch (err) {
-				throw err;
+				handleErr(err);
 			}
 		}
 	}
