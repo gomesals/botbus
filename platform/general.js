@@ -343,7 +343,31 @@
 		 */
 		async sendPrice() {
 			this.platform.sendText(defaultOf.price[getRandom(defaultOf.price.length)]);
-			// TODO: search and send the prices
+			const options = {
+				uri: `${process.env.APP_URL}api/prices`,
+				qs: {
+					info: 1,
+				},
+			};
+			try {
+				const prices = JSON.parse(await request(options));
+				let offset = 2500;
+				prices.map((price, index) => {
+					const msg = `${price.title}\u000A\u000A${price.price}`.replace('\n', '\u000A');
+					this.wait(offset, msg).then(msg => {
+						this.platform.sendText(msg);
+						if (index < prices.length - 1) {
+							this.wait(500).then(() => {
+								this.platform.sendWritting();
+							});
+						}
+					});
+					offset += 2900;
+				});
+			}
+			catch (err) {
+				handleErr(err);
+			}
 		}
 		/**
 		 * Sends a list of neighborhoods available.
@@ -426,5 +450,14 @@
 		message.text = message.text.replace('{schedule}', schedule);
 		message.text += ` ${message.icons}`;
 		return message.text;
+	}
+	/**
+	 * Generic handle error.
+	 * 
+	 * @param {Object} err Error
+	 * 
+	 */
+	function handleErr(err) {
+		console.log(err);
 	}
 })();
