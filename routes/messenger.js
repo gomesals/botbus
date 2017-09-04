@@ -26,7 +26,7 @@
 			if (event.message && event.message.text) {
 				try {
 					General.setText(event.message.text);
-					General.treat();
+					General.interpretate();
 				}
 				catch (err) {
 					handleErr(err);

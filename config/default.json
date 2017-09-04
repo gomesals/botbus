@@ -15,9 +15,17 @@
                 "payload": "ACTIONS_PAYLOAD_DOUBTS"
             }, {
                 "title": "Sobre",
-                "payload": "ACTION_PAYLOAD_HELP"
+                "payload": "ACTION_PAYLOAD_ABOUT"
             }]
-        }
+        },
+        "examples": [
+            "Oi, para construir uma frase, você precisa dizer de onde quer ir e para onde quer ir.\u000A\u000AAqui estão alguns exemplos",
+            "Do centro até o arrastão\u000ADe barequeçaba até a enseada",
+            "E você pode dizer a hora que quer o ônibus também, veja um exemplo:",
+            "Depois das 10:00 do guaecá até o topo",
+            "Ah, e lembre-se que você precisa inserir 'de/até' antes do bairro pra eu poder entender ;)",
+            "Acho que você já consegue, tente aí agora :)"
+        ]
     },
     "defaults": {
         "hi": [
