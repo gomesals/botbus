@@ -80,6 +80,14 @@
 		isDefined() {
 			return new Promise((resolve, reject) => {
 				switch (this.text.toUpperCase()) {
+					case 'MARCO':
+						this.platform.sendText('...Polo');
+						resolve(true);
+						break;
+					case '🎈':
+						this.platform.sendText('  🎈\u000A🙋 peguei!');
+						resolve(true);
+						break;
 					case 'EXEMPLOS':
 						this.sendExamples();
 						resolve(true);
