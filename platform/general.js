@@ -3,7 +3,6 @@
     const request = require('request-promise');
     const config = require('config');
     const Analyze = require('../tools/analyze');
-
     // Default texts
     const defaultOf = {
         price: config.get('defaults.price'),
@@ -60,13 +59,16 @@
         /**
          * Returns a callback after the @ms time.
          * 
-         * @param {Int} ms Time in milliseconds to wai.
+         * @param {Int} ms Time in milliseconds to wait;
+         * @param {any} data Data to be used after timeout.
          * @reutrn	{Function} Callback
          * 
          */
-        wait(ms) {
+        wait(ms, data = null) {
             return new Promise(async(resolve) => {
-                setTimeout(resolve, ms);
+                setTimeout(() => {
+                    resolve(data);
+                }, ms);
             });
         }
         /**
@@ -104,15 +106,54 @@
                 this.platform.sendText(defaultOf.compliment[getRandom(defaultOf.compliment.length)]);
                 return;
             }
-            if(intent.hasList){
-                this.platform.sendText(defaultOf.list[getRandom(defaultOf.list.length)]);
-                this.platform.sendWritting();
-                // TODO: search and send the neighborhoods
+            if (intent.hasList) {
+                this.sendList();
                 return;
             }
             this.platform.sendText(defaultOf.confused[getRandom(defaultOf.confused.length)]);
             // TODO: send buttons of help
             return;
+        }
+        async sendList() {
+            this.platform.sendText(defaultOf.list[getRandom(defaultOf.list.length)]);
+            const options = {
+                uri: `${process.env.APP_URL}api/neighborhoods`,
+                qs: {
+                    title: 1,
+                },
+            };
+            try {
+                const data = JSON.parse(await request(options));
+                const limit = 10;
+                var msg = '';
+                var offset = 1300;
+                const offset_plus = 6000;
+                var count = 0;
+                data.map((item, index) => {
+                    msg += `${item.title}\u000A`;
+                    if (index > 0) {
+                        if (index % limit === 0) {
+                            count += 1;
+                            this.wait(offset, msg).then(msg => {
+                                this.platform.sendWritting();
+                                this.wait(5000, msg).then(msg => {
+                                    this.platform.sendText(msg);
+                                });
+                            });
+                            offset += offset_plus;
+                            msg = '';
+                        }
+                        if ((data.length / 10) - 1 === count && index === data.length - 1) {
+                            this.wait(offset + offset_plus, msg).then(msg => {
+                                this.platform.sendText(msg);
+                            });
+                        }
+                    }
+                });
+            }
+            catch (err) {
+                throw err;
+            }
         }
     }
     module.exports = General;
