@@ -8,7 +8,7 @@
     let ID = '';
     chai.use(chaiHttp);
 
-    describe('api', () => {
+    describe('Neighborhoods api', () => {
         describe('POST', () => {
             it('should create one item', async() => {
                 try {
