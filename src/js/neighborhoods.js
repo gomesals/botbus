@@ -37,7 +37,7 @@
 				url: (vm.edit ? `api/neighborhoods/${id}` : 'api/neighborhoods'),
 				data: vm.data,
 			}).then(r => {
-				window.location = 'painel/neighborhoods';
+				window.location = 'painel/bairros';
 			}, handleError);
 		};
 	}

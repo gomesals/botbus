@@ -1,0 +1,21 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/form.css" media="all")
+		title BusBot - Bairros
+	body(data-ng-app="busbot")
+		include default/navbar.pug
+		main(role="main" data-ng-controller="pricesFormCtrl as tarifa" data-ng-init="tarifa.edit="+edit+"")
+			form(name="bairroForm")
+				section
+					.form-control
+						label Título
+						input.input(type="text" data-ng-model="tarifa.data.title" placeholder="Título" required data-ng-disabled="tarifa.saving")
+					.form-control
+						label Valor
+						textarea.input(type="text" data-ng-model="tarifa.data.price" placeholder="Valor" required data-ng-disabled="tarifa.saving")
+				.actions
+					a(href="/painel/tarifas" title="Cancelar" data-ng-disabled="tarifa.saving") Cancelar
+					button(data-ng-click="tarifa.save()" data-ng-disabled="bairroForm.$invalid || tarifa.saving") Salvar
+		script(src="js/prices.js")

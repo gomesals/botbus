@@ -35,6 +35,10 @@ main {
             .title {
                 lost-column: 4/6;
                 font-size: 1.2em;
+                .secondary {
+                    font-size: .9em;
+                    color: $text--secondary;
+                }
             }
             .actions {
                 lost-column: 2/6;

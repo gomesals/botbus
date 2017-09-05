@@ -1,0 +1,21 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/list.css" media="all")
+		title BusBot - Bairros
+	body(data-ng-app="busbot")
+		include default/navbar.pug
+		main(role="main" data-ng-controller="pricesCtrl as tarifas")
+			.addMore
+				a(href="painel/tarifas/nova" title="Adicionar tarifa") Adicionar tarifa
+			ul
+				li(data-ng-repeat="tarifa in tarifas.data")
+					.title {{tarifa.title}}
+						.secondary
+							div(data-ng-repeat="p in tarifa.price") {{p}}
+					.actions
+						a(data-ng-href="painel/tarifas/{{tarifa._id}}" title="Editar") Editar
+						button(data-ng-click="tarifas.remove(tarifa)" title="Remover") Remover
+			// p(data-ng-hide="filtered.length") Não foram encontrados bairros.
+		script(src="js/prices.js")

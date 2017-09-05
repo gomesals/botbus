@@ -8,14 +8,14 @@ html(lang="pt-br")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="neighCtrl as bairros")
 			.addMore
-				a(href="painel/neighborhoods/novo" title="Adicionar bairro") Adicionar bairro
+				a(href="painel/bairros/novo" title="Adicionar bairro") Adicionar bairro
 			.search
 				input.input(type="search" data-ng-model="bairros.search" placeholder="Pesquise bairros")
 			ul
 				li(data-ng-repeat="bairro in filtered = (bairros.data | filter: bairros.search)")
 					.title {{bairro.title}}
 					.actions
-						a(data-ng-href="painel/neighborhoods/{{bairro._id}}" title="Editar") Editar
+						a(data-ng-href="painel/bairros/{{bairro._id}}" title="Editar") Editar
 						button(data-ng-click="bairros.remove(bairro)" title="Remover") Remover
 			p(data-ng-hide="filtered.length") Não foram encontrados bairros.
 		script(src="js/neighborhoods.js")

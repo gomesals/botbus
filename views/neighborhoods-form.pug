@@ -13,6 +13,6 @@ html(lang="pt-br")
 						label Título
 						input.input(type="text" data-ng-model="bairro.data.title" placeholder="Título" required data-ng-disabled="bairro.saving")
 				.actions
-					a(href="/painel/neighborhoods" title="Cancelar" data-ng-disabled="bairro.saving") Cancelar
+					a(href="/painel/bairros" title="Cancelar" data-ng-disabled="bairro.saving") Cancelar
 					button(data-ng-click="bairro.save()" data-ng-disabled="bairroForm.$invalid || bairro.saving") Salvar
 		script(src="js/neighborhoods.js")
