@@ -3,7 +3,7 @@
 main {
     .addMore {
         text-align: right;
-        margin-bottom: 1em;
+        margin-bottom: 2em;
         a {
             @mixin button-accent 1,
             true;

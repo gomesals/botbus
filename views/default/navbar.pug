@@ -1,2 +1,46 @@
-navbar
-    div aqui é a navbar
+nav(role="navigation")
+	.logo 
+		a(href="painel/" title="BusBot") BusBot
+	.links
+		ul
+			li
+				a(href="painel/" title="Itinerários") Itinerários
+			li
+				a(href="painel/trajetos" title="Trajetos") Trajetos
+			li
+				a(href="painel/bairros" title="Bairros") Bairros
+			li
+				a(href="painel/tarifas" title="Tarifas") Tarifas
+			li
+				a(href="painel/sair" title="Sair") Sair
+#menu(title="Alternar menu")
+	.icon-bar
+	.icon-bar
+	.icon-bar
+#nav-links
+	ul
+		li
+			a(href="painel/" title="Itinerários") Itinerários
+		li
+			a(href="painel/trajetos" title="Trajetos") Trajetos
+		li
+			a(href="painel/bairros" title="Bairros") Bairros
+		li
+			a(href="painel/tarifas" title="Tarifas") Tarifas
+		li
+			a(href="painel/sair" title="Sair") Sair
+script.
+	var menu = document.getElementById('menu');
+	var navLinks = document.getElementById('nav-links');
+	var showMenu = false;
+	menu.addEventListener('click', function() {
+		showMenu = !showMenu;
+		if (showMenu) {
+			menu.className += 'mobile';
+			navLinks.className += 'mobile';
+		}
+		else {
+			menu.classList.remove('mobile');
+			navLinks.classList.remove('mobile');
+		}
+	});
