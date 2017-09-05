@@ -5,11 +5,9 @@
 
 	function neighCtrl($http) {
 		const vm = this;
-		vm.name = 'alexandre';
 		$http.get('api/neighborhoods').then(r => {
 			vm.data = r.data;
 		}, handleError);
-
 		vm.remove = item => {
 			const index = vm.data.indexOf(item);
 			$http.delete(`api/neighborhoods/${vm.data[index]._id}`).then(r => {
