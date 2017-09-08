@@ -1,0 +1,39 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/paths-form.css" media="all")
+		title BusBot - Trajetos
+	body(data-ng-app="busbot")
+		include default/navbar.pug
+		main(role="main" data-ng-controller="pathsFormCtrl as trajeto" data-ng-init="trajeto.edit="+edit+"")
+			form(name="trajetoForm")
+				section
+					.form-control
+						label Título
+						input.input(type="text" data-ng-model="trajeto.data.title" placeholder="Título" required data-ng-disabled="trajeto.saving")
+					.form-control
+						label Bairros
+						p Não esqueça de selecionar os bairros de onde o ônibus sai e pra onde vai.
+						p.help Selecione as variações dos bairros em sequência.
+					ul
+						li(data-ng-repeat="bairro in trajeto.neighborhoods")
+							label
+								input(type="checkbox" data-checklist-model="trajeto.selected" data-checklist-value="bairro.title" data-ng-change="trajeto.confirm()")
+								span {{bairro.title}}
+				section#confirm
+					p Confirme o sentido do trajeto
+					.well
+						span.nb(data-ng-repeat="i in trajeto.selected")
+							span.ttl {{i}}
+							span.to &gt;
+					.form-control#c-cb
+						input#confirm-cb(type="checkbox" data-ng-model="trajeto.confirmed" required)
+						label(for="confirm-cb") Confirmado
+					.actions-clr
+						button(type="button" data-ng-click="trajeto.clear()") Limpar bairros
+				.actions
+					a(href="/painel/trajetos" title="Cancelar" data-ng-disabled="trajeto.saving") Cancelar
+					button(data-ng-click="trajeto.save()" data-ng-disabled="trajetoForm.$invalid || trajeto.saving") Salvar
+		script(src="js/checklist-model.js")
+		script(src="js/paths.js")

@@ -1,0 +1,22 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/list.css" media="all")
+		title BusBot - Trajetos
+	body(data-ng-app="busbot")
+		include default/navbar.pug
+		main(role="main" data-ng-controller="pathsCtrl as trajetos")
+			.addMore
+				a(href="painel/trajetos/novo" title="Adicionar trajeto") Adicionar trajeto
+			.search
+				input.input(type="search" data-ng-model="trajetos.search" placeholder="Pesquisar trajetos")
+			ul
+				li(data-ng-repeat="trajeto in filtered = (trajetos.data | filter: trajetos.search)")
+					.title {{trajeto.title}}
+					.actions
+						a(data-ng-href="painel/trajetos/{{trajeto._id}}" title="Editar") Editar
+						button(data-ng-click="trajetos.remove(trajeto)" title="Remover") Remover
+			p(data-ng-hide="filtered.length") Não foram encontrados trajetos.
+		script(src="js/checklist-model.js")
+		script(src="js/paths.js")

@@ -17,10 +17,12 @@
 	const PAINEL = {
 		neighborhoods: require('./routes/neighborhoods'),
 		prices: require('./routes/prices'),
+		paths: require('./routes/paths'),
 	};
 	require('./settings')(app);
 	app.use('/painel/bairros', PAINEL.neighborhoods);
 	app.use('/painel/tarifas', PAINEL.prices);
+	app.use('/painel/trajetos', PAINEL.paths);
 	app.use('/api/auth', API.auth);
 	app.use('/api/lines', API.lines);
 	app.use('/api/paths', API.paths);

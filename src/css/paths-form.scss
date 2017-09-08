@@ -1,0 +1,61 @@
+// @import "lib/_default.scss";
+// @import "lib/_form.scss";
+@import "form.scss";
+ul {
+    list-style: none;
+    lost-utility: clearfix;
+    li {
+        lost-column: 1/3;
+        margin-bottom: .5em;
+        label {
+            cursor: pointer;
+            input {
+                margin-right: .5em;
+            }
+        }
+    }
+}
+
+#confirm {
+    p {
+        margin-bottom: 1rem;
+    }
+    .well {
+        background-color: $gray;
+        padding: .5em;
+        margin-bottom: 1rem;
+        .nb {
+            span {
+                display: inline-block;
+            }
+            .to {
+                margin-left: .3em;
+                margin-right: .3em;
+            }
+            &:last-child {
+                .to {
+                    display: none;
+                }
+            }
+        }
+    }
+    #c-cb {
+        input {
+            display: inline-block;
+            margin-right: .5em;
+        }
+        label {
+            color: $text--secondary;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+    .actions-clr {
+        text-align: right;
+        button {
+            @mixin button-accent 1,
+            true,
+            0;
+        }
+    }
+}
