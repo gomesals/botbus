@@ -18,11 +18,13 @@
 		neighborhoods: require('./routes/neighborhoods'),
 		prices: require('./routes/prices'),
 		paths: require('./routes/paths'),
+		lines: require('./routes/lines'),
 	};
 	require('./settings')(app);
 	app.use('/painel/bairros', PAINEL.neighborhoods);
 	app.use('/painel/tarifas', PAINEL.prices);
 	app.use('/painel/trajetos', PAINEL.paths);
+	app.use('/painel/itinerarios', PAINEL.lines);
 	app.use('/api/auth', API.auth);
 	app.use('/api/lines', API.lines);
 	app.use('/api/paths', API.paths);

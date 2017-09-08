@@ -1,0 +1,69 @@
+(function() {
+	'use strict';
+	const express = require('express');
+	const router = express.Router();
+	const Lines = require('../models/lines.model');
+	router.route('/').get(_get).post(_post);
+	router.route('/:id').get(_getOne).delete(_delete);
+
+	async function _get(req, res) {
+		if (req.query.info) {
+			try {
+				return res.json(await Lines.find({}, 'from to timeOutShow workDay'));
+			}
+			catch (err) {
+				res.sendStatus(500);
+				handleErr(err);
+			}
+		}
+		try {
+			return res.json(await Lines.find({}));
+		}
+		catch (err) {
+			res.sendStatus(500);
+			handleErr(err);
+		}
+	};
+	async function _post(req, res) {
+		try {
+			const data = await new Lines(req.body).save();
+			if (data) {
+				return res.json(data);
+			}
+			return res.sendStatus(500);
+		}
+		catch (err) {
+			res.sendStatus(500);
+			handleErr(err);
+		}
+	};
+	async function _getOne(req, res) {
+		try {
+			const data = await Lines.findOne({ _id: req.params.id });
+			if (data) {
+				return res.json(data);
+			}
+			return res.sendStatus(404);
+		}
+		catch (err) {
+			res.sendStatus(500);
+			handleErr(err);
+		}
+	};
+
+	async function _delete(req, res) {
+		try {
+			await Lines.remove({ _id: req.params.id });
+			return res.sendStatus(200);
+		}
+		catch (err) {
+			res.sendStatus(500);
+			handleErr(err);
+		}
+	};
+	module.exports = router;
+
+	function handleErr(err) {
+		console.log(err);
+	}
+})();
