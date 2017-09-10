@@ -250,6 +250,10 @@
 					break;
 			}
 		}
+		/**
+		 * Sends the texts informing about the bot.
+		 * 
+		 */
 		async sendAbout() {
 			const { first_name } = await this.platform.getInfo();
 			const buttonAlexandre = await this.platform.createButton('Alexandre', 'url', 'https://facebook.com/silvalexandre0');
