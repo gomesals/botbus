@@ -12,6 +12,7 @@
 		compliment: config.get('defaults.compliment'),
 		confused: config.get('defaults.confused'),
 		list: config.get('defaults.list'),
+		notFound: config.get('defaults.notFound'),
 	};
 	const searching = {
 		defaults: config.get('search.defaults'),
@@ -128,10 +129,7 @@
 			const { intent, ...search } = Analyze.content(this.text);
 			// console.log(intent);
 			if (intent.isAllowed) {
-				this.platform.sendText(getSearchingText(search));
-				this.platform.sendWritting();
-				console.log(search);
-				// TODO: search and send the information
+				this.sendLines(search);
 				return;
 			}
 			if (intent.hasPrice) {
@@ -160,6 +158,42 @@
 			}
 			this.confused();
 			return;
+		}
+		/**
+		 * Search the lines and send the result
+		 * 
+		 * @param {Object} search Search params
+		 * 
+		 */
+		async sendLines(search) {
+			let offset = 500;
+			this.platform.sendText(getSearchingText(search));
+			await this.wait(offset);
+			this.platform.sendWritting();
+			offset += 500;
+			try {
+				const res = JSON.parse(await request(`${process.env.APP_URL}api/bot/${search.from}/${search.to}/${search.time}/true/${search.check}`));
+				if (res.length === 0) {
+					await this.wait(offset);
+					this.platform.sendText(defaultOf.notFound);
+				}
+				else {
+					this.sendLinesResult(res);
+				}
+			}
+			catch (err) {
+				this.platform.sendText(defaultOf.notFound);
+			}
+		}
+		/**
+		 * Send the lines result
+		 * 
+		 * @param {Object} lines Lines content
+		 * 
+		 */
+		async sendLinesResult(lines) {
+			// TODO: send the results
+			this.platform.sendText('Here comes the data');
 		}
 		/**
 		 * Treats postbacks

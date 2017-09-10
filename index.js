@@ -13,6 +13,7 @@
 		paths: require('./api/paths'),
 		neighborhoods: require('./api/neighborhoods'),
 		prices: require('./api/prices'),
+		bot: require('./api/bot'),
 	};
 	const PAINEL = {
 		neighborhoods: require('./routes/neighborhoods'),
@@ -30,6 +31,7 @@
 	app.use('/api/paths', API.paths);
 	app.use('/api/neighborhoods', API.neighborhoods);
 	app.use('/api/prices', API.prices);
+	app.use('/api/bot', API.bot);
 	app.use('/', PAGES.index);
 	app.use('/webhook/messenger', PAGES.messenger);
 	app.listen((process.env.PORT || 3000), () => {

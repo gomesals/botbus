@@ -60,6 +60,7 @@
         }
     },
     "defaults": {
+        "notFound": "Não encontrei nenhum ônibus disponível nesse horário =/",
         "hi": [
             "Oi",
             "Oiee",
