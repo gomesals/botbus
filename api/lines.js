@@ -4,12 +4,12 @@
 	const router = express.Router();
 	const Lines = require('../models/lines.model');
 	router.route('/').get(_get).post(_post);
-	router.route('/:id').get(_getOne).delete(_delete);
+	router.route('/:id').get(_getOne).put(_put).delete(_delete);
 
 	async function _get(req, res) {
 		if (req.query.info) {
 			try {
-				return res.json(await Lines.find({}, 'from to timeOutShow workDay'));
+				return res.json(await Lines.find({}, 'from passesBy special to workDay'));
 			}
 			catch (err) {
 				res.sendStatus(500);
@@ -44,6 +44,17 @@
 				return res.json(data);
 			}
 			return res.sendStatus(404);
+		}
+		catch (err) {
+			res.sendStatus(500);
+			handleErr(err);
+		}
+	};
+
+	async function _put(req, res) {
+		try {
+			const { ok } = await Lines.update({ _id: req.params.id }, { $set: req.body });
+			return res.sendStatus(ok === 1 ? 200 : 500);
 		}
 		catch (err) {
 			res.sendStatus(500);

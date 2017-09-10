@@ -16,7 +16,7 @@ main {
     table {
         width: 100%;
         border-collapse: separate;
-        border-spacing: 0 1em;
+        border-spacing: 0 .5em;
         tr{
             td{
                 text-align: center;
@@ -36,6 +36,10 @@ main {
                 td {
                     padding: .5em;
                     &:last-child {
+                        a{
+                            @mixin button-default 1, false, 0;
+                            margin-right: 1em;
+                        }
                         button {
                             @mixin button-danger 1,
                             false,

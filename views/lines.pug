@@ -16,28 +16,36 @@ html(lang="pt-br")
 					tr
 						th De
 						th Para
-						th Hora
+						th Especial
+						th Via
 						th Dia
 						th Ação
 				tbody
 					tr.high(data-ng-hide="itinerarios.loading === true || filtered.length")
-						td(colspan="5") Não foram encontrados itinerários.
+						td(colspan="6") Não foram encontrados itinerários.
 					tr.high(data-ng-show="itinerarios.loading")
-						td(colspan="5") Carregando itinerários...
+						td(colspan="6") Carregando itinerários...
 					tr(data-ng-repeat="itinerario in filtered = (itinerarios.data | filter: itinerarios.search) track by $index")
 						td {{itinerario.from}}
 						td {{itinerario.to}}
-						td {{itinerario.timeOutShow}}
+						td
+							span(data-ng-show="itinerario.special") Sim
+							span(data-ng-hide="itinerario.special") Não
+						td
+							span(data-ng-hide="itinerario.passesBy.length") -
+							span(data-ng-show="itinerario.passesBy.length" data-ng-repeat="pb in itinerario.passesBy")
+								div {{pb}}
 						td
 							span(data-ng-repeat="wd in itinerario.workDay")
-								span(data-ng-show="wd === 'Sun'") Dom,&nbsp;
-								span(data-ng-show="wd === 'Mon'") Seg,&nbsp;
-								span(data-ng-show="wd === 'Tue'") Ter,&nbsp;
-								span(data-ng-show="wd === 'Wed'") Qua,&nbsp;
-								span(data-ng-show="wd === 'Thu'") Qui,&nbsp;
-								span(data-ng-show="wd === 'Fri'") Sex,&nbsp;
-								span(data-ng-show="wd === 'Sat'") Sáb,&nbsp;
+								div(data-ng-show="wd === 'Sun'" title="Domingo") Dom
+								div(data-ng-show="wd === 'Mon'" title="Segunda-feira") Seg
+								div(data-ng-show="wd === 'Tue'" title="Terça-feira") Ter
+								div(data-ng-show="wd === 'Wed'" title="Quarta-feira") Qua
+								div(data-ng-show="wd === 'Thu'" title="Quinta-feira") Qui
+								div(data-ng-show="wd === 'Fri'" title="Sexta-feira") Sex
+								div(data-ng-show="wd === 'Sat'" title="Sábado") Sáb
 						td
-							button(data-ng-click="itinerarios.remove(itinerario)") Excluir
+							a(data-ng-href="/painel/itinerarios/{{itinerario._id}}" title="Editar") Editar
+							button(data-ng-click="itinerarios.remove(itinerario)" title="Excluir") Excluir
 		script(src="js/checklist-model.js")
 		script(src="js/lines.js")
