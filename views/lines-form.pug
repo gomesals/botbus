@@ -1,0 +1,51 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/lines-form.css" media="all")
+		title BusBot - Itinerário
+	body(data-ng-app="busbot")
+		include default/navbar.pug
+		main(role="main" data-ng-controller="linesFormCtrl as itinerario" data-ng-init="itinerario.edit="+edit+"")
+			form(name="itiForm")
+				section
+					.form-control
+						label De
+						input.input(type="text" data-ng-model="itinerario.data.from" placeholder="De" required data-ng-disabled="itinerario.saving")
+					.form-control
+						label Para
+						input.input(type="text" data-ng-model="itinerario.data.to" placeholder="Para" required data-ng-disabled="itinerario.saving")
+					.form-control
+						label Trajeto
+						select.input(data-ng-model="itinerario.data.path_id" data-ng-disabled="itinerario.saving")
+							option(value="") Selecione o trajeto
+							option(data-ng-repeat="item in itinerario.paths", value="{{item._id}}") {{item.title}}
+					.form-control
+						label Via
+						input.input(type="text" data-ng-model="itinerario.data.passesBy" placeholder="Via" data-ng-disabled="itinerario.saving")
+						.help Separe por vírgula. Ex.: Via escola, Via hospital
+					.form-control
+						label Horários
+						input.input(type="text" data-ng-model="itinerario.data.timeOutShow" placeholder="Via" required data-ng-disabled="itinerario.saving")
+						.help Separe por vírgula. Ex.: 10:30, 12:20, 18:00
+					.form-control
+						label Dias da Semana
+						.days
+							.day(ng-repeat="item in itinerario.days")
+									label
+										input(type="checkbox", data-checklist-model="itinerario.data.workDay", data-checklist-value="item.value" data-ng-disabled="itinerario.saving")
+										span {{item.title}}
+					.form-control
+						label Ônibus para portadores
+						.rd
+							label
+								input(type="radio" data-ng-model="itinerario.data.special" data-ng-value="true" data-ng-disabled="itinerario.saving")
+								span Sim
+							label
+								input(type="radio" data-ng-model="itinerario.data.special" data-ng-value="false" data-ng-disabled="itinerario.saving")
+								span Não
+				.actions
+					a(href="/painel/itinerarios" title="Cancelar" data-ng-disabled="itinerario.saving") Cancelar
+					button(data-ng-click="itinerario.save()" data-ng-disabled="itiForm.$invalid || itinerario.saving") Salvar
+		script(src="js/checklist-model.js")
+		script(src="js/lines.js")

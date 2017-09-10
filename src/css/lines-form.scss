@@ -1,0 +1,32 @@
+@import "form.scss";
+main {
+    form {
+        section {
+            .form-control {
+                select{
+                    background-color: #fff;
+                }
+                .rd,
+                .days {
+                    label {
+                        cursor: pointer;
+                        &:first-child {
+                            margin-right: 1.5em;
+                        }
+                        span {
+                            margin-left: .5em;
+                            color: $text;
+                        }
+                    }
+                }
+                .days {
+                    lost-utility: clearfix;
+                    .day {
+                        lost-column: 1/4;
+                    }
+                }
+                .rd {}
+            }
+        }
+    }
+}

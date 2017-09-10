@@ -1,7 +1,7 @@
 /*global angular*/
 (function() {
 	'use strict';
-	angular.module('busbot').controller('linesCtrl', linesCtrl).controller('linesFormCtrl', linesFormCtrl);
+	angular.module('busbot', ['checklist-model']).controller('linesCtrl', linesCtrl).controller('linesFormCtrl', linesFormCtrl);
 
 	function linesCtrl($http) {
 		const vm = this;
@@ -22,24 +22,49 @@
 
 	function linesFormCtrl($http) {
 		const vm = this;
+		const id = window.location.pathname.split('/')[3];
 		vm.saving = false;
 		vm.data = {};
-		const id = window.location.pathname.split('/')[3];
+		vm.days = [{
+			value: 'Sun',
+			title: 'Domingo'
+		}, {
+			value: 'Mon',
+			title: 'Segunda-feira'
+		}, {
+			value: 'Tue',
+			title: 'Terça-feira'
+		}, {
+			value: 'Wed',
+			title: 'Quarta-feira'
+		}, {
+			value: 'Thu',
+			title: 'Quinta-feira'
+		}, {
+			value: 'Fri',
+			title: 'Sexta-feira'
+		}, {
+			value: 'Sat',
+			title: 'Sábado'
+		}];
 		setTimeout(() => {
 			if (vm.edit) {
-				$http.get(`api/neighborhoods/${id}`).then(r => {
+				$http.get(`api/lines/${id}`).then(r => {
 					vm.data = r.data;
 				}, handleError);
 			}
 		}, 100);
+		$http.get('/api/paths').then(r => {
+			vm.paths = r.data;
+		}, handleError);
 		vm.save = () => {
 			vm.saving = true;
 			$http({
 				method: (vm.edit ? 'PUT' : 'POST'),
-				url: (vm.edit ? `api/neighborhoods/${id}` : 'api/neighborhoods'),
+				url: (vm.edit ? `api/lines/${id}` : 'api/lines'),
 				data: vm.data,
 			}).then(r => {
-				window.location = 'painel/bairros';
+				window.location = 'painel/itinerarios';
 			}, handleError);
 		};
 	}
