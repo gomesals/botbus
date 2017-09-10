@@ -130,7 +130,6 @@
 		 */
 		treat() {
 			const { intent, ...search } = Analyze.content(this.text);
-			// console.log(intent);
 			if (intent.isAllowed) {
 				this.sendLines(search);
 				return;

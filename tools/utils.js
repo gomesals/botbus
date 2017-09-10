@@ -176,16 +176,24 @@
 			const patternFromReplace = /(d(o|e)|ate( (o|a))?) ?/gmi;
 			const patternTo = / (ate( (o|a))?|a(o|i)?|pr(o|a)|para( o)?|ao) [a-z]{3,}( ?(([a-z]| )+))/gmi;
 			const patternToReplace = / (a|o|ao|ate( (o|a))?|a(o|i)?|pr(o|a)|para( o)?|(antes|depois) das) /gmi;
-			let from = message.match(patternFrom, '');
-			from = from[0].replace(patternFromReplace, '');
-			from = from.replace(/^ /, '').replace(/ $/, '');
-			let to = message.match(patternTo, '');
-			to = to[0].replace(patternToReplace, '');
-			to = to.replace(/^(a|o)? /, '').replace(/ $/, '');
-			return {
-				from,
-				to,
-			};
+			try {
+				let from = message.match(patternFrom, '');
+				from = from[0].replace(patternFromReplace, '');
+				from = from.replace(/^ /, '').replace(/ $/, '');
+				let to = message.match(patternTo, '');
+				to = to[0].replace(patternToReplace, '');
+				to = to.replace(/^(a|o)? /, '').replace(/ $/, '');
+				return {
+					from,
+					to,
+				};
+			}
+			catch (err) {
+				return {
+					from: false,
+					to: false,
+				};
+			}
 		}
 		return {
 			from: false,
