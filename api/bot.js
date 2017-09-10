@@ -12,16 +12,17 @@
 
 	async function _get(req, res) {
 		try {
-			const search = constructSearch(req.params);
+			const { search, time } = constructSearch(req.params);
 			const data = await Lines
-				.find(search, 'timeOut timeOutShow special neighborhoods passesBy from to')
+				.find(search, 'timeOut special neighborhoods passesBy from to')
 				.sort({ timeOut: 1 })
 				.limit(8);
-			const results = await direction.compare({
+			const resultsFilteredByDirection = await direction.compare({
 				from: req.params.from,
 				to: req.params.to,
 			}, data, 4);
-			return res.json(results);
+
+			return res.json(filterTime({ time }, resultsFilteredByDirection));
 		}
 		catch (err) {
 			res.sendStatus(500);
@@ -29,6 +30,45 @@
 		}
 	};
 	module.exports = router;
+
+	/**
+	 * Filters the results with the search time.
+	 * 
+	 * @param {Object} filter options. {time}
+	 * @param {Object} results The results from the search already filtered by location.
+	 * @return	{Object} Results with the time filtered. {from, to timeOut, special, passesBy}
+	 * 
+	 */
+	function filterTime(filter, results) {
+		return results.map(line => {
+			const timeSorted = line.timeOut.sort();
+			if (!filter.time.lte) {
+				line.timeOut = timeSorted.filter(time => {
+					return parseInt(time, 10) >= parseInt(filter.time.gte, 10);
+				}).filter((time, index) => {
+					if (index < 4) {
+						return time;
+					}
+				});
+			}
+			else {
+				line.timeOut = timeSorted.filter(time => {
+					return parseInt(time, 10) <= parseInt(filter.time.lte, 10);
+				}).reverse().filter((time, index) => {
+					if (index < 4) {
+						return time;
+					}
+				});
+			}
+			return {
+				from: line.from,
+				to: line.to,
+				timeOut: line.timeOut,
+				special: line.special,
+				passesBy: line.passesBy,
+			};
+		});
+	}
 
 	/**
 	 * Constructs and returns the search object.
@@ -47,18 +87,21 @@
 			},
 			workDay: getDay(params.today),
 		};
+		const gte = getTime(params.now, params.check);
+		let lte;
 		if (!params.check || params.check === 'gte') {
 			search.timeOut = {
-				$gte: getTime(params.now, params.check)
+				$gte: gte,
 			};
 		}
 		else {
 			search.timeOut = {
-				$gte: getTime(params.now, params.check),
+				$gte: gte,
 				$lte: params.now
 			};
+			lte = params.now;
 		}
-		return search;
+		return { search, time: { gte, lte } };
 	}
 
 	/**
@@ -70,16 +113,11 @@
 	 * 
 	 */
 	function getTime(time, period) {
-		let t = time === 'true' ? moment().format('HHmm') : time;
+		const timeSearch = moment().hour(time[0] + '' + time[1]).minute(time[2] + '' + time[3]);
 		if (period === 'lt') {
-			t -= 170;
+			return timeSearch.subtract(90, 'minutes').format('HHmm');
 		}
-		else {
-			t -= 5;
-		}
-		t = (t < 1000) ? '0' + t : t;
-		t = (t < 100) ? '0' + t : t;
-		return t;
+		return timeSearch.subtract(10, 'minutes').format('HHmm');
 	}
 
 	/**

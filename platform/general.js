@@ -3,6 +3,7 @@
 	const request = require('request-promise');
 	const config = require('config');
 	const Analyze = require('../tools/analyze');
+	const moment = require('moment-timezone');
 	// Default texts
 	const defaultOf = {
 		price: config.get('defaults.price'),
@@ -24,6 +25,8 @@
 			icons: config.get('search.replace.icons'),
 		},
 	};
+	moment.locale('pt-br');
+	moment.tz.setDefault("America/Sao_Paulo");
 
 	/**
 	 * Class to handle the messages sent by the user.
@@ -168,21 +171,25 @@
 		async sendLines(search) {
 			let offset = 500;
 			this.platform.sendText(getSearchingText(search));
-			await this.wait(offset);
-			this.platform.sendWritting();
+			this.wait(offset).then(() => {
+				this.platform.sendWritting();
+			});
 			offset += 500;
 			try {
 				const res = JSON.parse(await request(`${process.env.APP_URL}api/bot/${search.from}/${search.to}/${search.time}/true/${search.check}`));
 				if (res.length === 0) {
-					await this.wait(offset);
-					this.platform.sendText(defaultOf.notFound);
+					this.wait(offset).then(() => {
+						this.platform.sendText(defaultOf.notFound);
+					});
 				}
 				else {
 					this.sendLinesResult(res);
 				}
 			}
 			catch (err) {
-				this.platform.sendText(defaultOf.notFound);
+				this.wait(offset).then(() => {
+					this.platform.sendText(defaultOf.notFound);
+				});
 			}
 		}
 		/**
@@ -192,8 +199,101 @@
 		 * 
 		 */
 		async sendLinesResult(lines) {
-			// TODO: send the results
-			this.platform.sendText('Here comes the data');
+			const mapFat = [{
+					number: '1⃣',
+					clock: '🕐'
+				},
+				{
+					number: '2⃣',
+					clock: '🕑'
+				},
+				{
+					number: '3⃣',
+					clock: '🕒'
+				},
+				{
+					number: '4⃣',
+					clock: '🕓'
+				},
+				{
+					number: '5⃣',
+					clock: '🕔'
+				},
+				{
+					number: '6⃣',
+					clock: '🕕'
+				},
+				{
+					number: '7⃣',
+					clock: '🕖'
+				},
+				{
+					number: '8⃣',
+					clock: '🕗'
+				},
+				{
+					number: '9⃣',
+					clock: '🕘'
+				},
+				{
+					number: '🔟',
+					clock: '🕙'
+				}
+			];
+			const messages = lines.map(line => {
+				const first = line.timeOut[0];
+				const now = moment().format('HHmm');
+				const late = parseInt(now, 10) >= parseInt(first, 10);
+				const fat = parseInt(first, 10) - parseInt(now, 10);
+				let message = '';
+				message += config.get('line.timeOut');
+				message += line.timeOut.map(time => ` ${time[0]}${time[1]}:${time[2]}${time[3]}`);
+				message += config.get('line.fromTo').replace('{from}', line.from).replace('{to}', line.to);
+				if (line.passesBy.length) {
+					message += config.get('line.passesBy');
+					message += line.passesBy.map(by => config.get('line.passesByItem').replace('{by}', by));
+				}
+				if (line.special) {
+					message += config.get('line.special');
+				}
+				else {
+					message += config.get('line.notSpecial');
+				}
+				if (late) {
+					if (fat >= -10) {
+						message += config.get('line.busOut').replace('{time}', `${first[0]}${first[1]}:${first[2]}${first[3]}`);
+					}
+				}
+				if (fat <= 10 && fat > 0) {
+					if (fat === 1) {
+						message += config.get('line.outInMinute').replace('{clock}', mapFat[fat - 1].clock).replace('{number}', mapFat[fat - 1].number);
+					}
+					else {
+						message += config.get('line.outInMinutes').replace('{time}', fat).replace('{clock}', mapFat[fat - 1].clock).replace('{number}', mapFat[fat - 1].number);
+					}
+				}
+				return message;
+			});
+			let offset = 2000;
+			messages.map(async message => {
+				this.wait(offset, message).then(message => {
+					this.platform.sendText(message);
+					this.wait(600).then(() => {
+						this.platform.sendWritting();
+					});
+				});
+				offset += 6000;
+			});
+			if (messages.length === 4) {
+				this.wait(offset).then(() => {
+					this.platform.sendText(config.get('line.linesMax'));
+				});
+			}
+			else {
+				this.wait(offset).then(() => {
+					this.platform.sendText(config.get('line.justThese'));
+				});
+			}
 		}
 		/**
 		 * Treats postbacks

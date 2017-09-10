@@ -109,10 +109,10 @@
     },
     "search": {
         "defaults": [
-            "{verb} {object} de '{from}' à '{to}', {schedule}",
-            "{verb} {object} saindo de '{from}' com destino à '{to}', {schedule}",
-            "{verb} {object} que passam entre '{from}' e '{to}', {schedule}",
-            "{verb} {object} entre '{from}' e '{to}', {schedule}"
+            "🕵 {verb} {object} de '{from}' à '{to}', {schedule}",
+            "🕵 {verb} {object} saindo de '{from}' com destino à '{to}', {schedule}",
+            "🕵 {verb} {object} que passam entre '{from}' e '{to}', {schedule}",
+            "🕵 {verb} {object} entre '{from}' e '{to}', {schedule}"
         ],
         "replace": {
             "verb": [
@@ -135,5 +135,18 @@
                 "󾮅"
             ]
         }
+    },
+    "line": {
+        "timeOut": "🕒 ",
+        "fromTo": "\u000A\u000A🚍 {from} ➡️ {to}",
+        "passesBy": "\u000A\u000A🚏 Via",
+        "passesByItem": "\u000A-- {by}",
+        "special": "\u000A\u000A♿️ O veículo deveria ser adaptado à portadores de deficiência física",
+        "notSpecial": "\u000A\u000A♿️ O veículo pode não ser adaptado à portadores de deficiência física",
+        "outInMinute": "\u000A\u000A{clock} O ônibus sai em {number} (1) minuto",
+        "outInMinutes": "\u000A\u000A{clock} O ônibus sai em {number} ({time}) minutos",
+        "busOut": "\u000A\u000A🚌💨 Ei, o ônibus das {time} já saiu, mas pode ser que ainda dê tempo de você pegar 🏃",
+        "linesMax": "Ah, eu exibo no máximo quatro resultados viu 😉?! Se nenhum horário te agradou, você pode pesquisar novamente 😁",
+        "justThese": "Não há mais resultados disponíveis no momento 😥"
     }
 }
