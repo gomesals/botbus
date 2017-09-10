@@ -1,4 +1,35 @@
 @import "lib/_default.scss";
+.img-c {
+	text-align: center;
+	margin: 3em auto;
+	img {
+		border-radius: 50%;
+	}
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 3em;
+	font-weight: 300;
+}
+
 main {
-	background-color: red;
+	@mixin card;
+	padding: 2em;
+	h2 {
+		font-weight: 300;
+		margin-bottom: 1em;
+	}
+	p {
+		margin-bottom: 1.5em;
+		line-height: 1.1em;
+	}
+	a {
+		transition: color 150ms linear;
+		color: $accent;
+		margin-right: 1em;
+		&:hover {
+			color: $primary;
+		}
+	}
 }

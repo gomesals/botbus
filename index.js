@@ -6,6 +6,7 @@
 	const PAGES = {
 		index: require('./routes/index'),
 		messenger: require('./routes/messenger'),
+		privacy: require('./routes/privacy'),
 	};
 	const API = {
 		auth: require('./api/auth'),
@@ -22,6 +23,7 @@
 		lines: require('./routes/lines'),
 	};
 	require('./settings')(app);
+	app.use('/privacidade', PAGES.privacy);
 	app.use('/painel/bairros', PAINEL.neighborhoods);
 	app.use('/painel/tarifas', PAINEL.prices);
 	app.use('/painel/trajetos', PAINEL.paths);
