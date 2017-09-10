@@ -3,7 +3,6 @@
 	const express = require('express');
 	const router = express.Router();
 	const Lines = require('../models/lines.model');
-	const request = require('request-promise');
 	const moment = require('moment-timezone');
 	const direction = require('../tools/direction');
 	moment.locale('pt-br');

@@ -1,55 +1,55 @@
 @import "lib/_default.scss";
 @import "lib/_form.scss";
 main {
-    .addMore {
-        text-align: right;
-        margin-bottom: 2em;
-        a {
-            @mixin button-accent 1,
-            true;
-            display: inline-block;
-        }
-    }
-    .search {
-        margin-bottom: 2em;
-    }
-    table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0 .5em;
-        tr {
-            td {
-                text-align: center;
-            }
-        }
-        thead {}
-        tbody {
-            tr {
-                @mixin card 1,
-                true;
-                &:hover {
-                    transform: scale(1.01);
-                }
-                &.high {
-                    text-align: center;
-                }
-                td {
-                    padding: .5em;
-                    &:last-child {
-                        a {
-                            @mixin button-default 1,
-                            false,
-                            0;
-                            margin-right: 1em;
-                        }
-                        button {
-                            @mixin button-danger 1,
-                            false,
-                            0;
-                        }
-                    }
-                }
-            }
-        }
-    }
+	.addMore {
+		text-align: right;
+		margin-bottom: 2em;
+		a {
+			@mixin button-accent 1,
+			true;
+			display: inline-block;
+		}
+	}
+	.search {
+		margin-bottom: 2em;
+	}
+	table {
+		width: 100%;
+		border-collapse: separate;
+		border-spacing: 0 .5em;
+		tr {
+			td {
+				text-align: center;
+			}
+		}
+		thead {}
+		tbody {
+			tr {
+				@mixin card 1,
+				true;
+				&:hover {
+					transform: scale(1.01);
+				}
+				&.high {
+					text-align: center;
+				}
+				td {
+					padding: .5em;
+					&:last-child {
+						a {
+							@mixin button-default 1,
+							false,
+							0;
+							margin-right: 1em;
+						}
+						button {
+							@mixin button-danger 1,
+							false,
+							0;
+						}
+					}
+				}
+			}
+		}
+	}
 }

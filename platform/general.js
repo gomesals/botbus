@@ -590,7 +590,7 @@
 		return message.text;
 	}
 	/**
-	 * Generic handle error.
+	 * Generic handler error.
 	 * 
 	 * @param {Object} err Error
 	 * 

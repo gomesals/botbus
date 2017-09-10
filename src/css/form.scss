@@ -1,22 +1,25 @@
 @import "lib/_default.scss";
 @import "lib/_form.scss";
-navbar{
-    margin-bottom: 5rem;
+navbar {
+	margin-bottom: 5rem;
 }
+
 main {
-    section{
-        @mixin card;
-        margin-bottom: 2em;
-    }
-    .actions{
-        text-align: right;
-        a{
-            @mixin button-default 1, true;
-            display: inline-block;
-            margin-right: .5em;
-        }
-        button{
-            @mixin button-primary 1, true;
-        }
-    }
+	section {
+		@mixin card;
+		margin-bottom: 2em;
+	}
+	.actions {
+		text-align: right;
+		a {
+			@mixin button-default 1,
+			true;
+			display: inline-block;
+			margin-right: .5em;
+		}
+		button {
+			@mixin button-primary 1,
+			true;
+		}
+	}
 }

@@ -54,14 +54,14 @@
 			if (hasCompliment(message)) {
 				intent.hasCompliment = true;
 			}
-			if(hasList((message))){
+			if (hasList((message))) {
 				intent.hasList = true;
 			}
 			const place = util.getPlace(message);
 			const time = util.convertTime(message);
 			intent.hasPlace = (place.from && place.to) ? true : false;
 			if (hasRequest(message) || (place.from && place.to)) {
-				if(hasRequest(message)){
+				if (hasRequest(message)) {
 					intent.hasRequest = true;
 				}
 				if (place.from && place.to) {

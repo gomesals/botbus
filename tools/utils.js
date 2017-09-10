@@ -138,9 +138,9 @@
 	}];
 	const period = ['manha', 'tarde', 'noite'];
 	const check = ['antes', 'Antes', 'depois', 'Depois'];
-	
 	moment.locale('pt-br');
 	moment.tz.setDefault("America/Sao_Paulo");
+
 	/**
 	 * Removes accents.
 	 * 
@@ -148,7 +148,6 @@
 	 * @return       {string} The word without accents
 	 */
 	const removeAccents = (word) => word.replace(/[\W\[\] ]/gim, (letter) => accentsMap[letter] || letter).toLowerCase();
-
 	/**
 	 * Removes a time.
 	 *
@@ -157,7 +156,7 @@
 	 */
 	const removeTime = (message) => {
 		timeMap.map(element => {
-			message = message.replace(element.from[0], '').replace(element.from[1], '');    
+			message = message.replace(element.from[0], '').replace(element.from[1], '');
 		});
 		return message;
 	};
@@ -208,17 +207,20 @@
 			temp = separate[0].split(':');
 			result.hour = '0' + temp[0];
 			result.minute = temp[1] + '0';
-		} else {
+		}
+		else {
 			temp = time.split('');
 			let first = parseInt(temp[0], 10);
 			if (first === 0) {
 				result.hour = '0' + temp[1];
 				result.minute = temp[2] + '0';
-			} else {
+			}
+			else {
 				if (first > 2) {
 					result.hour = '0' + temp[0];
 					result.minute = temp[1] + temp[2];
-				} else {
+				}
+				else {
 					result.hour = temp[0] + temp[1];
 					result.minute = temp[2] + '0';
 				}
@@ -285,16 +287,21 @@
 				if (message.search('vinte e') != -1) {
 					if (message.search('vinte e uma') != -1) {
 						hour = hour.concat('21');
-					} else if (message.search('vinte e duas') != -1) {
+					}
+					else if (message.search('vinte e duas') != -1) {
 						hour = hour.concat('22');
-					} else if (message.search('vinte e tres') != -1) {
+					}
+					else if (message.search('vinte e tres') != -1) {
 						hour = hour.concat('23');
-					} else if (message.search('vinte e quatro') != -1) {
+					}
+					else if (message.search('vinte e quatro') != -1) {
 						hour = hour.concat('00');
-					} else {
+					}
+					else {
 						hour = hour.concat('20');
 					}
-				} else {
+				}
+				else {
 					hour = hour.concat(time.to.pm);
 				}
 			}
@@ -318,12 +325,12 @@
 	 * @return {object} with hour and minute
 	 */
 	const analyzeTime = (message) => {
-	    const hour = getHours(message);
-	    const minute = getMinutes(message);
-	    return {
-	        hour,
-	        minute
-	    };
+		const hour = getHours(message);
+		const minute = getMinutes(message);
+		return {
+			hour,
+			minute
+		};
 	};
 	/**
 	 * Check if the time is to be used as after or before the time given
@@ -334,7 +341,8 @@
 	const isAfterBefore = (message) => {
 		if (message.search(check[0]) != -1 || message.search(check[1]) != -1) {
 			return 'lt';
-		} else {
+		}
+		else {
 			return 'gte';
 		}
 	};
@@ -351,15 +359,16 @@
 		}
 		if (message.search(period[0]) != -1) {
 			return 'am';
-		} else {
+		}
+		else {
 			if (message.search(period[1]) != -1 || message.search(period[2]) != -1) {
 				return 'pm';
-			} else {
+			}
+			else {
 				return moment().format('a');
 			}
 		}
 	};
-	
 	/**
 	 * Converts from text to number
 	 * Ex.: dezesseis e meia (sixteen and half) -> 16:30
@@ -373,7 +382,8 @@
 		const number = getNumber(message);
 		if (number) {
 			result = number;
-		} else {
+		}
+		else {
 			result = analyzeTime(message);
 		}
 		if (!result.hour) {
