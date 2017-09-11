@@ -3,10 +3,17 @@ html(lang="pt-br")
 	head
 		include default/header.pug
 		link(rel="stylesheet" href="css/lines-form.css" media="all")
-		title BusBot - Itinerário
+		if edit
+			title BusBot - Editar Itinerário
+		else
+			title BusBot - Novo Itinerário
 	body(data-ng-app="busbot")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="linesFormCtrl as itinerario" data-ng-init="itinerario.edit="+edit+"")
+			if edit
+				h1 Editar Itinerário
+			else
+				h1 Novo Itinerário
 			form(name="itiForm")
 				section
 					.form-control

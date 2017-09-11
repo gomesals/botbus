@@ -30,3 +30,17 @@ main {
 		}
 	}
 }
+
+@media (--xs) {
+	form {
+		section {
+			.form-control {
+				.days {
+					.day {
+						lost-column: 1/2 !important;
+					}
+				}
+			}
+		}
+	}
+}

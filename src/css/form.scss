@@ -5,6 +5,11 @@ navbar {
 }
 
 main {
+	h1 {
+		font-weight: 300;
+		margin-top: 2em;
+		margin-bottom: 2em;
+	}
 	section {
 		@mixin card;
 		margin-bottom: 2em;

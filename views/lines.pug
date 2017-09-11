@@ -3,14 +3,15 @@ html(lang="pt-br")
 	head
 		include default/header.pug
 		link(rel="stylesheet" href="css/lines.css" media="all")
-		title BusBot - Trajetos
+		title BusBot - Itinerários
 	body(data-ng-app="busbot")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="linesCtrl as itinerarios")
+			h1 Itinerários
 			.addMore
-				a(href="painel/itinerarios/novo" title="Adicionar itinerario") Adicionar linha
+				a(href="painel/itinerarios/novo" title="Adicionar itinerario") Adicionar itinerário
 			.search
-				input.input(type="search" data-ng-model="itinerarios.search" placeholder="Pesquisar trajetos")
+				input.input(type="search" data-ng-model="itinerarios.search" placeholder="Pesquisar itinerários")
 			table
 				thead
 					tr

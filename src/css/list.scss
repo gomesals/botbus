@@ -1,6 +1,9 @@
 @import "lib/_default.scss";
 @import "lib/_form.scss";
 main {
+	h1 {
+		font-weight: 300;
+	}
 	.addMore {
 		text-align: right;
 		margin-bottom: 2em;

@@ -3,10 +3,17 @@ html(lang="pt-br")
 	head
 		include default/header.pug
 		link(rel="stylesheet" href="css/form.css" media="all")
-		title BusBot - Bairros
+		if edit
+			title BusBot - Editar bairro
+		else
+			title BusBot - Novo bairro
 	body(data-ng-app="busbot")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="neighFormCtrl as bairro" data-ng-init="bairro.edit="+edit+"")
+			if edit
+				h1 Editar bairro
+			else
+				h1 Novo bairro
 			form(name="bairroForm")
 				section
 					.form-control

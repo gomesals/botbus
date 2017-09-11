@@ -3,10 +3,17 @@ html(lang="pt-br")
 	head
 		include default/header.pug
 		link(rel="stylesheet" href="css/form.css" media="all")
-		title BusBot - Bairros
+		if edit
+			title BusBot - Editar tarifa
+		else
+			title BusBot - Nova tarifa
 	body(data-ng-app="busbot")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="pricesFormCtrl as tarifa" data-ng-init="tarifa.edit="+edit+"")
+			if edit
+				h1 Editar tarifa
+			else
+				h1 Nova tarifa
 			form(name="bairroForm")
 				section
 					.form-control

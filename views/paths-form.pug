@@ -3,10 +3,17 @@ html(lang="pt-br")
 	head
 		include default/header.pug
 		link(rel="stylesheet" href="css/paths-form.css" media="all")
-		title BusBot - Trajetos
+		if edit
+			title BusBot - Editar Trajeto
+		else
+			title BusBot - Novo Trajeto
 	body(data-ng-app="busbot")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="pathsFormCtrl as trajeto" data-ng-init="trajeto.edit="+edit+"")
+			if edit
+				h1 Editar Trajeto
+			else
+				h1 Novo Trajeto
 			form(name="trajetoForm")
 				section
 					.form-control
