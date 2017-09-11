@@ -1,6 +1,6 @@
 # BusBot
 
-Este Chatbot desenvolvido em Node.js, como projeto de TCC para o IFSP Caraguatatuba.
+Este Chatbot foi desenvolvido em Node.js, como projeto de TCC para o IFSP Caraguatatuba.
 
 O objetivo deste Chatbot é informar aos seus usuários os horários de ônibus mais próximos com os parâmetros solicitados, tais como origem, destino e horário aproximado da partida do ônibus.
 

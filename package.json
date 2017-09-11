@@ -1,7 +1,7 @@
 {
 	"name": "busbot",
-	"version": "0.0.1",
-	"description": "Projeto de chatbot utilizando Node.js como projeto de conclusão de curso de análise e desenvolvimento de sistemas do IFSP - Campus Caraguatatuba",
+	"version": "1.0.0",
+	"description": "Este Chatbot foi desenvolvido em Node.js, como projeto de TCC para o IFSP Caraguatatuba.",
 	"main": "index.js",
 	"scripts": {
 		"start": "pm2 start index.js",
