@@ -49,7 +49,10 @@
 				data: vm.data,
 			}).then(r => {
 				window.location = 'painel/tarifas';
-			}, handleError);
+			}, e => {
+				vm.saving = false;
+				handleError(e);
+			});
 		};
 	}
 

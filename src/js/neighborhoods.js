@@ -38,7 +38,10 @@
 				data: vm.data,
 			}).then(r => {
 				window.location = 'painel/bairros';
-			}, handleError);
+			}, e => {
+				vm.saving = false;
+				handleError(e);
+			});
 		};
 	}
 

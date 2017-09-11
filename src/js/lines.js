@@ -9,7 +9,10 @@
 		$http.get('api/lines').then(r => {
 			vm.data = r.data;
 			vm.loading = false;
-		}, handleError);
+		}, e => {
+			vm.loading = false;
+			handleError(e);
+		});
 		vm.remove = item => {
 			const index = vm.data.indexOf(item);
 			$http.delete(`api/lines/${vm.data[index]._id}`).then(r => {
@@ -65,7 +68,10 @@
 				data: vm.data,
 			}).then(r => {
 				window.location = 'painel/itinerarios';
-			}, handleError);
+			}, e => {
+				vm.saving = false;
+				handleError(e);
+			});
 		};
 	}
 

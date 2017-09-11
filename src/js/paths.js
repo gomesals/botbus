@@ -52,7 +52,10 @@
 				data,
 			}).then(r => {
 				window.location = 'painel/trajetos';
-			}, handleError);
+			}, e => {
+				vm.saving = false;
+				handleError(e);
+			});
 		};
 	}
 
