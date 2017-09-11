@@ -3,6 +3,7 @@
 	const express = require('express');
 	const bodyParser = require('body-parser');
 	const compression = require('compression');
+	const session = require('express-session');
 	const mongoose = require('mongoose');
 	const moment = require('moment');
 	const mongodbUri = process.env.MONGO_CONTROL;
@@ -26,6 +27,11 @@
 		app.use(compression());
 		app.use(bodyParser.urlencoded({
 			extended: false
+		}));
+		app.use(session({
+			secret: process.env.AUTH_SECRET,
+			saveUninitialized: true,
+			resave: true
 		}));
 		app.locals.Site = {
 			base: process.env.APP_URL,

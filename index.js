@@ -21,9 +21,11 @@
 		prices: require('./routes/prices'),
 		paths: require('./routes/paths'),
 		lines: require('./routes/lines'),
+		auth: require('./routes/auth'),
 	};
 	require('./settings')(app);
 	app.use('/privacidade', PAGES.privacy);
+	app.use('/painel', PAINEL.auth);
 	app.use('/painel/bairros', PAINEL.neighborhoods);
 	app.use('/painel/tarifas', PAINEL.prices);
 	app.use('/painel/trajetos', PAINEL.paths);

@@ -1,0 +1,24 @@
+doctype
+html(lang="pt-br")
+	head
+		include default/header.pug
+		link(rel="stylesheet" href="css/index.css" media="all")
+		title BusBot - Acesso
+	body(data-ng-app="busbot")
+		.img-c
+			img(src="https://scontent.fssz1-1.fna.fbcdn.net/v/t1.0-1/p200x200/16507966_815707985243814_3267314369439561047_n.png?oh=5362f1f161ba96ae063ea5aa023a122a&oe=5A586E5C" alt="BusBot" tite="BusBot")
+		h1 BusBot
+		main(role="main" data-ng-controller="authCtrl as auth")
+			h2 Acesso
+			form(name="authForm")
+				.form-control
+					label Usuário
+					input.input(type="text" data-ng-model="auth.data.user" autofocus required data-ng-disabled="auth.checking" placeholder="Usuário")
+				.form-control
+					label Senha
+					input.input(type="password" data-ng-model="auth.data.pass" required data-ng-disabled="auth.checking" placeholder="Senha")
+				.action
+					button(data-ng-click="auth.check()" data-ng-disabled="authForm.$invalid || auth.checking") Acessar
+			p
+				a(href="/" title="Página inicial") Página inicial
+			script(src="js/auth.js")

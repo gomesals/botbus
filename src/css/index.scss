@@ -1,7 +1,8 @@
 @import "lib/_default.scss";
+@import "lib/_form.scss";
 .img-c {
 	text-align: center;
-	margin: 3em auto;
+	margin: 2em auto;
 	img {
 		border-radius: 50%;
 	}
@@ -9,7 +10,7 @@
 
 h1 {
 	text-align: center;
-	margin-bottom: 3em;
+	margin-bottom: 2em;
 	font-weight: 300;
 }
 
@@ -30,6 +31,14 @@ main {
 		margin-right: 1em;
 		&:hover {
 			color: $primary;
+		}
+	}
+	form{
+		.action{
+			text-align: right;
+			button{
+				@mixin button-accent 1, true;
+			}
 		}
 	}
 }
