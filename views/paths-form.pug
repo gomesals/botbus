@@ -4,10 +4,10 @@ html(lang="pt-br")
 		include default/header.pug
 		link(rel="stylesheet" href="css/paths-form.css" media="all")
 		if edit
-			title BusBot - Editar Trajeto
+			title BotBus - Editar Trajeto
 		else
-			title BusBot - Novo Trajeto
-	body(data-ng-app="busbot")
+			title BotBus - Novo Trajeto
+	body(data-ng-app="botbus")
 		include default/navbar.pug
 		main(role="main" data-ng-controller="pathsFormCtrl as trajeto" data-ng-init="trajeto.edit="+edit+"")
 			if edit

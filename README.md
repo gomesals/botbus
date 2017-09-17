@@ -1,4 +1,4 @@
-# BusBot
+# BotBus
 
 Este Chatbot foi desenvolvido em Node.js, como projeto de TCC para o IFSP Caraguatatuba.
 
@@ -8,8 +8,8 @@ Por enquanto, o Chatbot utiliza regex para identificar a intenção e todos os p
 
 Este projeto foi desenvolvido sob a licença MIT, e a licença de aplicativos utilizados desenvolvido por terceiros encontra-se em seus respectivos arquivos.
 
-O código fonte, bem como a identificação de seus autores, pode ser encontrado em [https://github.com/silvalexandre/busbot](https://github.com/silvalexandre/busbot "GitHub")
+O código fonte, bem como a identificação de seus autores, pode ser encontrado em [https://github.com/silvalexandre/botbus](https://github.com/silvalexandre/botbus "GitHub")
 
-[Página do BusBot no Facebook](https://www.facebook.com/botbus/ "Página do BusBot no Facebook")
+[Página do BotBus no Facebook](https://www.facebook.com/botbus/ "Página do BotBus no Facebook")
 
-![alt text](https://scontent.fssz1-1.fna.fbcdn.net/v/t1.0-1/p200x200/16507966_815707985243814_3267314369439561047_n.png?oh=5362f1f161ba96ae063ea5aa023a122a&oe=5A586E5C "BusBot")
+![alt text](https://scontent.fssz1-1.fna.fbcdn.net/v/t1.0-1/p200x200/16507966_815707985243814_3267314369439561047_n.png?oh=5362f1f161ba96ae063ea5aa023a122a&oe=5A586E5C "BotBys")

@@ -2,7 +2,7 @@
 (function() {
 	'use strict';
 	angular
-		.module('busbot')
+		.module('botbus')
 		.controller('pricesCtrl', pricesCtrl)
 		.controller('pricesFormCtrl', pricesFormCtrl);
 

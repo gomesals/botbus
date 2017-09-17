@@ -1,7 +1,7 @@
 {
     "postback": {
         "getStarted": [
-            "Oi, prazer em te conhecer, eu sou o BusBot 🤖, e sou o bot que diz o seu próximo ônibus 🚌🚌",
+            "Oi, prazer em te conhecer, eu sou o BotBus 🤖, e sou o bot que diz o seu próximo ônibus 🚌🚌",
             "Como eu ainda sou novo, só conheço as linhas de São Sebastião/SP, mas quando eu crescer, vou poder conhecer as linhas de todo o Brasil 🇧🇷, inclusíve aí da sua cidade ;)",
             "Vou deixar algumas opções aqui pra você, aí você pode me conhecer melhor 😉"
         ],
@@ -47,7 +47,7 @@
         },
         "about": {
             "hi": [
-                "Oi, que bom que você quer me conhecer ✌️ Eu me chamo BusBot, e fui criado para te ajudar a saber qual o horário do próximo ônibus 🚌, legal né?!😎😎",
+                "Oi, que bom que você quer me conhecer ✌️ Eu me chamo BotBus, e fui criado para te ajudar a saber qual o horário do próximo ônibus 🚌, legal né?!😎😎",
                 "Fui criado pois meus criadores estavam cansados de ficarem mofando no ponto esperando o ônibus passar, e carregar um monte de foto e arquivo sobre os horários é chato né? Foi depois disso que eu vim ao mundo =D"
             ],
             "iAmChild": "Eu posso ser meio lerdinho as vezes, e não entender o que você quer dizer, mas não fique nervoso! Eu sou uma criança, e ainda estou aprendendo a ler e a escrever 🙊🙉",

@@ -1,7 +1,7 @@
 /*global angular*/
 (function() {
 	'use strict';
-	angular.module('busbot').controller('neighCtrl', neighCtrl).controller('neighFormCtrl', neighFormCtrl);
+	angular.module('botbus').controller('neighCtrl', neighCtrl).controller('neighFormCtrl', neighFormCtrl);
 
 	function neighCtrl($http) {
 		const vm = this;

@@ -15,7 +15,7 @@
 		options.body = {
 			setting_type: "greeting",
 			greeting: {
-				text: 'Oi {{user_first_name}}, eu sou o BusBot, e tô aqui pra te ajudar com os ônibus de São Sebastião.',
+				text: 'Oi {{user_first_name}}, eu sou o BotBus, e tô aqui pra te ajudar com os ônibus de São Sebastião.',
 			},
 		};
 		const { result } = await request(options);

@@ -1,5 +1,5 @@
 /*global angular*/
 (function() {
     'use strict';
-    angular.module('busbot', []);
+    angular.module('botbus', []);
 })();

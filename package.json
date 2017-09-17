@@ -1,5 +1,5 @@
 {
-	"name": "busbot",
+	"name": "botbus",
 	"version": "1.0.0",
 	"description": "Este Chatbot foi desenvolvido em Node.js, como projeto de TCC para o IFSP Caraguatatuba.",
 	"main": "index.js",
@@ -12,7 +12,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/silvalexandre/busbot.git"
+		"url": "git+ssh://git@github.com/silvalexandre/botbus.git"
 	},
 	"keywords": [
 		"node.js",
@@ -22,9 +22,9 @@
 	"author": "Alexandre Silva <contato@silvalexandre.com>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/silvalexandre/busbot/issues"
+		"url": "https://github.com/silvalexandre/botbus/issues"
 	},
-	"homepage": "https://github.com/silvalexandre/busbot#README",
+	"homepage": "https://github.com/silvalexandre/botbus#README",
 	"dependencies": {
 		"body-parser": "^1.17.1",
 		"compression": "^1.7.0",

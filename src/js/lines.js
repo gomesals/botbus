@@ -1,7 +1,7 @@
 /*global angular*/
 (function() {
 	'use strict';
-	angular.module('busbot', ['checklist-model']).controller('linesCtrl', linesCtrl).controller('linesFormCtrl', linesFormCtrl);
+	angular.module('botbus', ['checklist-model']).controller('linesCtrl', linesCtrl).controller('linesFormCtrl', linesFormCtrl);
 
 	function linesCtrl($http) {
 		const vm = this;
