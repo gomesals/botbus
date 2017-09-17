@@ -4,7 +4,8 @@
 	"description": "Este Chatbot foi desenvolvido em Node.js, como projeto de TCC para o IFSP Caraguatatuba.",
 	"main": "index.js",
 	"scripts": {
-		"start": "pm2 start index.js",
+		"start": "node index.js",
+		"deploy": "pm2 start index.js",
 		"configure": "node configure.js",
 		"dev": "nodemon index.js --ignore public/ --ignore test/",
 		"test": "NODE_ENV=test supervisor -q -n exit -x mocha -- -b",
