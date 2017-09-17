@@ -11,15 +11,14 @@
 		"test": "NODE_ENV=test supervisor -q -n exit -x mocha -- -b",
 		"test_api": "NODE_ENV=test supervisor -q -n exit -x mocha -- -b --grep api"
 	},
+	"engines": {
+		"node": ">= 7.6.0"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+ssh://git@github.com/silvalexandre/botbus.git"
 	},
-	"keywords": [
-		"node.js",
-		"chatbot",
-		"ifsp"
-	],
+	"keywords": ["node.js", "chatbot", "ifsp"],
 	"author": "Alexandre Silva <contato@silvalexandre.com>",
 	"license": "MIT",
 	"bugs": {
