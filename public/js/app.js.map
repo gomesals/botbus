@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/js/app.js"],"names":["angular","module"],"mappings":"aACA,CAAC,UAAW,CACR,aACAA,QAAQC,MAAR,CAAe,QAAf,CAAyB,EAAzB,CACH,CAHD","file":"app.js","sourcesContent":["/*global angular*/\n(function() {\n    'use strict';\n    angular.module('botbus', []);\n})();\n"]}

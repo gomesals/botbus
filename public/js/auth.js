@@ -1,0 +1,2 @@
+'use strict';(function(){'use strict';angular.module('botbus').controller('authCtrl',authCtrl);function authCtrl($http){var vm=this;vm.data={};vm.checking=false;vm.check=function(){vm.checking=true;$http.post('api/auth',vm.data).then(function(r){window.location='painel/itinerarios'},function(e){vm.checking=false;handleError(e)})}}function handleError(e){if(e.status===403){alert('Usu\xE1rio ou senha incorretos')}console.log(e)}authCtrl.$inject=['$http']})();
+//# sourceMappingURL=auth.js.map
