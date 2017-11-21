@@ -364,6 +364,12 @@
 				expect(result.from).to.equal('morro');
 				expect(result.to).to.equal('morro do abrigo');
 			});
+			
+			it('should return `enseada;centro`', () => {
+				const result = util.getPlace('da enseada ao centro');
+				expect(result.from).to.equal('enseada');
+				expect(result.to).to.equal('centro');
+			});
 		});
 	});
 })();

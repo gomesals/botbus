@@ -169,11 +169,12 @@
 	const getPlace = (message) => {
 		message = removeAccents(message);
 		message = removeTime(message);
-		const pattern = /(d(o|e)|saindo d(o|e)) [a-z]{3,} ([a-z]{3,} )?(ate( (o|a))?|a(i|o)?|pr(o|a)|para( o)?) [a-z]{3,}/gmi;
+		const pattern = /(d(a|o|e)|saindo d(o|e)) [a-z]{3,} ([a-z]{3,} )?(ate( (o|a))?|a(i|o)?|pr(o|a)|para( o)?) [a-z]{3,}/gmi;
 		const place = message.match(pattern);
 		if (place) {
-			const patternFrom = /(do|de) [a-z]{3,} ([a-z]{3,} )?/gmi;
-			const patternFromReplace = /(d(o|e)|ate( (o|a))?) ?/gmi;
+			// const patternFrom = /(d(a|o|e)) (?!(manha|tarde|noite))[a-z]{3,} ([a-z]{3,} )?/gmi;
+			const patternFrom = /(d(a|o|e)) (?!(manha|tarde|noite))[a-z]{3,} ([a-z]{3,} )?/gmi;
+			const patternFromReplace = /(([^a-z ]|^)d(a|o|e)|ate( (o|a))?) /gmi;
 			const patternTo = / (ate( (o|a))?|a(o|i)?|pr(o|a)|para( o)?|ao) [a-z]{3,}( ?(([a-z]| )+))/gmi;
 			const patternToReplace = / (a|o|ao|ate( (o|a))?|a(o|i)?|pr(o|a)|para( o)?|(antes|depois) das) /gmi;
 			try {
